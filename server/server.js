@@ -82,19 +82,6 @@ async function get_home_timeline() {
       cur_tweet.profile_picture = data[i].user.profile_image_url_https;
       cur_tweet.likes = data[i].favorite_count;
       cur_tweet.liked = data[i].favorited;
-
-      // var updated = false;
-      // for (let i = home_timeline.length - 1; i >= home_timeline.length - 1 - HOME_TIMELINE_COUNT && i >= 0; i--) {
-      //   if (cur_tweet.id == home_timeline[i].id) {
-      //     home_timeline[i] = cur_tweet;
-      //     updated = true;
-      //     break;
-      //   }
-      // }
-      // if (!updated) {
-      //   home_timeline.push(cur_tweet);
-      // }
-
       if (!update_Tweet(cur_tweet)) {
         home_timeline.push(cur_tweet);
       }
