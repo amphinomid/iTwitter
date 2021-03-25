@@ -1,7 +1,7 @@
 require('dotenv').config({ path: '../.env' });
 const { TwitterClient } = require('twitter-api-client');
 const express = require("express");
-const FRIEND_CURSOR_COUNT = 100;
+const FRIEND_CURSOR_COUNT = 200;
 const HOME_TIMELINE_COUNT = 20;
 
 // Twitter client with environment variables (.env)
