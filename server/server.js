@@ -12,13 +12,6 @@ const twitterClient = new TwitterClient({
   accessTokenSecret: process.env['TWITTER_ACCESS_TOKEN_SECRET']
 });
 
-// class Friend {
-//   constructor(name, profile_picture) {
-//     this.name = name;
-//     this.profile_picture = profile_picture;
-//   }
-// }
-
 class Tweet {
   constructor(time, id, text, name, profile_picture, likes, liked) {
     this.time = time;
@@ -51,8 +44,6 @@ async function get_friends() {
       const data = await twitterClient.accountsAndUsers.friendsList(params);
       console.log(data.users.length);
       for (let i = 0; i < data.users.length; i++) {
-        //var cur_friend = new Friend(data.users[i].screen_name, data.users[i].profile_image_url_https);
-        //if (!friends.has(cur_friend)) friends.add(cur_friend);
         friends.add(data.users[i].profile_image_url_https);
       }
       params.cursor = data.next_cursor;
