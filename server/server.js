@@ -54,8 +54,6 @@ async function get_friends() {
   }
 }
 
-get_friends();
-
 // Print Tweets in home timeline (for debugging)
 async function print_home_timeline() {
   console.log("# of Tweets: " + home_timeline.length);
