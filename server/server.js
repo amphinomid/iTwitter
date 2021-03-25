@@ -1,7 +1,8 @@
 require('dotenv').config({ path: '../.env' });
 const { TwitterClient } = require('twitter-api-client');
 const express = require("express");
-const HOME_TIMELINE_COUNT = 3;
+const FRIEND_CURSOR_COUNT = 100;
+const HOME_TIMELINE_COUNT = 20;
 
 // Twitter client with environment variables (.env)
 const twitterClient = new TwitterClient({
@@ -11,12 +12,12 @@ const twitterClient = new TwitterClient({
   accessTokenSecret: process.env['TWITTER_ACCESS_TOKEN_SECRET']
 });
 
-class Friend {
-  constructor(name, profile_picture) {
-    this.name = name;
-    this.profile_picture = profile_picture;
-  }
-}
+// class Friend {
+//   constructor(name, profile_picture) {
+//     this.name = name;
+//     this.profile_picture = profile_picture;
+//   }
+// }
 
 class Tweet {
   constructor(time, id, text, name, profile_picture, likes, liked) {
@@ -30,27 +31,29 @@ class Tweet {
   }
 }
 
-var friends = new Array()
+var friends = new Set()
 var home_timeline = new Array()
 
 // Print current-following users (for debugging)
 async function print_friends() {
-  for (let i = 0; i < friends.length; i++) {
-    console.log(friends[i]);
-  }
+  console.log("# of friends: " + friends.size);
+  friends.forEach(function(friend) {
+    console.log(friend);
+  })
   console.log("\n");
 }
 
 // Get currently-following users
 async function get_friends() {
   try {
-    var params = { cursor: -1 };
+    var params = { cursor: -1, count: FRIEND_CURSOR_COUNT };
     while (params.cursor != 0) {
       const data = await twitterClient.accountsAndUsers.friendsList(params);
       console.log(data.users.length);
       for (let i = 0; i < data.users.length; i++) {
-        var cur_friend = new Friend(data.users[i].screen_name, data.users[i].profile_image_url_https);
-        friends.push(cur_friend);
+        //var cur_friend = new Friend(data.users[i].screen_name, data.users[i].profile_image_url_https);
+        //if (!friends.has(cur_friend)) friends.add(cur_friend);
+        friends.add(data.users[i].profile_image_url_https);
       }
       params.cursor = data.next_cursor;
     }
@@ -64,6 +67,7 @@ get_friends();
 
 // Print Tweets in home timeline (for debugging)
 async function print_home_timeline() {
+  console.log("# of Tweets: " + home_timeline.length);
   for (let i = 0; i < home_timeline.length; i++) {
     console.log(home_timeline[i]);
   }
