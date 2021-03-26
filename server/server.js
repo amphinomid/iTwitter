@@ -93,13 +93,28 @@ function update_Tweet(tweet) {
   return false;
 }
 
+// Get full text (including full RT, if applicable)
+function get_full_text(tweet) {
+  if (tweet.full_text.substring(0, 2) == "RT") {
+    var colon_index = 0;
+    for (let i = 0; i < tweet.full_text.length; i++) {
+      if (tweet.full_text[i] == ':') {
+        colon_index = i;
+        break;
+      }
+    }
+    return (tweet.full_text.substring(0, colon_index + 2) + tweet.retweeted_status.full_text);
+  }
+  return tweet.full_text;
+}
+
 // Get latest home timeline of Tweets
 async function get_home_timeline() {
   try {
-    var params = { count: HOME_TIMELINE_COUNT, exclude_replies: true };
+    var params = { count: HOME_TIMELINE_COUNT, exclude_replies: true, tweet_mode: 'extended' };
     const data = await twitterClient.tweets.statusesHomeTimeline(params);
     for (let i = data.length - 1; i >= 0; i--) {
-      var cur_tweet = new Tweet(data[i].created_at, data[i].id, data[i].text, data[i].user.screen_name,
+      var cur_tweet = new Tweet(data[i].created_at, data[i].id, get_full_text(data[i]), data[i].user.screen_name,
         data[i].user.profile_image_url_https, data[i].favorite_count, data[i].favorited);
       if (!update_Tweet(cur_tweet)) {
         home_timeline.push(cur_tweet);
@@ -109,6 +124,7 @@ async function get_home_timeline() {
       res.json({ message: home_timeline });
     });
     print_home_timeline();
+    console.log(data);
   } catch (e) {
     console.log("Error: ", e);
   }
