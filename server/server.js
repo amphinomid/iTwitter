@@ -3,6 +3,8 @@ const { TwitterClient } = require('twitter-api-client');
 const express = require("express");
 const FRIEND_CURSOR_COUNT = 200;
 const HOME_TIMELINE_COUNT = 20;
+const app = express();
+const PORT = process.env.PORT || 3001;
 
 // Twitter client with environment variables (.env)
 const twitterClient = new TwitterClient({
@@ -11,6 +13,13 @@ const twitterClient = new TwitterClient({
   accessToken: process.env['TWITTER_ACCESS_TOKEN'],
   accessTokenSecret: process.env['TWITTER_ACCESS_TOKEN_SECRET']
 });
+
+class Friend {
+  constructor(name, profile_picture) {
+    this.name = name;
+    this.profile_picture = profile_picture;
+  }
+}
 
 class Tweet {
   constructor(time, id, text, name, profile_picture, likes, liked) {
@@ -24,12 +33,13 @@ class Tweet {
   }
 }
 
-var friends = new Set()
+var friends_set = new Set()
+var friends = new Array()
 var home_timeline = new Array()
 
 // Print current-following users (for debugging)
 async function print_friends() {
-  console.log("# of friends: " + friends.size);
+  console.log("# of friends: " + friends.length);
   friends.forEach(function(friend) {
     console.log(friend);
   })
@@ -44,10 +54,17 @@ async function get_friends() {
       const data = await twitterClient.accountsAndUsers.friendsList(params);
       console.log(data.users.length);
       for (let i = 0; i < data.users.length; i++) {
-        friends.add(data.users[i].profile_image_url_https);
+        var prev_size = friends_set.size;
+        friends_set.add(data.users[i].profile_image_url_https);
+        if (friends_set.size != prev_size) {
+          friends.push(new Friend(data.users[i].screen_name, data.users[i].profile_image_url_https));
+        }
       }
       params.cursor = data.next_cursor;
     }
+    app.get("/friends", (req, res) => {
+      res.json({ message: friends });
+    });
     print_friends();
   } catch (e) {
     console.log("Error: ", e);
@@ -57,9 +74,9 @@ async function get_friends() {
 // Print Tweets in home timeline (for debugging)
 async function print_home_timeline() {
   console.log("# of Tweets: " + home_timeline.length);
-  for (let i = 0; i < home_timeline.length; i++) {
-    console.log(home_timeline[i]);
-  }
+  home_timeline.forEach(function(tweet) {
+    console.log(tweet);
+  })
   console.log("\n");
 }
 
@@ -92,14 +109,8 @@ async function get_home_timeline() {
   }
 }
 
-// Communicate with client
-const app = express();
-const PORT = process.env.PORT || 3001;
-
-app.get("/api", (req, res) => {
-  res.json({ message: 'Hi from server!' });
-});
-
 app.listen(PORT, () => {
   console.log(`Server listening on ${PORT}`);
 });
+
+get_friends();
