@@ -1,6 +1,6 @@
 import React from "react"
 import './Header.css'
-import ProfilePicture from './ProfilePicture'
+import HeaderProfilePicture from './HeaderProfilePicture'
 
 function Header() {
     const [friends, setData] = React.useState(null);
@@ -14,17 +14,18 @@ function Header() {
         <div className="header-container">
             <div className="profile-pictures-container">
                 {!friends
-                 ? <p style={{ textAlign: 'center', margin: 'auto' }}>⌛</p>
-                 : friends.map((friend, index) =>
-                 <ProfilePicture
-                    key={index}
-                    index={index}
-                    name={friend.name}
-                    url={friend.profile_picture}
-                    diameter={60}
-                    numFriends={friends.length}
-                    parentWidth={document.getElementsByClassName("profile-pictures-container")[0].clientWidth}
-                 />)
+                    ? <p style={{ textAlign: 'center', margin: 'auto' }}>⌛</p>
+                    : friends.map((friend, index) =>
+                        <HeaderProfilePicture
+                            key={index}
+                            index={index}
+                            name={friend.name}
+                            url={friend.profile_picture}
+                            diameter={60}
+                            numFriends={friends.length}
+                            parentWidth={document.getElementsByClassName("profile-pictures-container")[0].clientWidth}
+                        />
+                    )
                 }
             </div>
             {friends &&

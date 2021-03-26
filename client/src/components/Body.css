@@ -4,3 +4,11 @@
     overflow: scroll;
     scrollbar-width: none;
 }
+
+.placeholder {
+    height: 15vh;
+}
+
+::-webkit-scrollbar {
+    width: 0;
+}

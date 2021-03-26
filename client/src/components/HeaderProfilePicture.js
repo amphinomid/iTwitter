@@ -1,5 +1,5 @@
 
-function ProfilePicture(props) {
+function HeaderProfilePicture(props) {
     return (
         <img
             src={props.url}
@@ -18,4 +18,4 @@ function ProfilePicture(props) {
     )
 }
 
-export default ProfilePicture
+export default HeaderProfilePicture

@@ -1,0 +1,18 @@
+.gray-tweet {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    margin: 1rem 0 1rem 0;
+}
+
+.gray-message {
+    max-width: 75%;
+    border-radius: 1.1rem;
+    margin: 0.5rem;
+    color: white;
+    background-color: #5e5e5e;
+}
+
+.tweet-text {
+    margin: 0.7rem;
+}

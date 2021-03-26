@@ -1,6 +1,7 @@
 require('dotenv').config({ path: '../.env' });
 const { TwitterClient } = require('twitter-api-client');
-const express = require("express");
+const express = require('express');
+const shuffle = require('shuffle-array');
 const FRIEND_CURSOR_COUNT = 200;
 const HOME_TIMELINE_COUNT = 20;
 const app = express();
@@ -62,6 +63,7 @@ async function get_friends() {
       }
       params.cursor = data.next_cursor;
     }
+    shuffle(friends);
     app.get("/friends", (req, res) => {
       res.json({ message: friends });
     });
@@ -103,6 +105,9 @@ async function get_home_timeline() {
         home_timeline.push(cur_tweet);
       }
     }
+    app.get("/home_timeline", (req, res) => {
+      res.json({ message: home_timeline });
+    });
     print_home_timeline();
   } catch (e) {
     console.log("Error: ", e);
@@ -114,3 +119,6 @@ app.listen(PORT, () => {
 });
 
 get_friends();
+
+// Temporary
+get_home_timeline();

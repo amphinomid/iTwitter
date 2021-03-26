@@ -1,6 +1,6 @@
 import './Message.css'
 
-function Message(props) {
+function BlueMessage(props) {
     return (
         <div style={{ color: 'white' }}>
             {props.profile_picture}
@@ -11,4 +11,4 @@ function Message(props) {
     )
 }
 
-export default Message
+export default BlueMessage
