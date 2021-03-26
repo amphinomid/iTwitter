@@ -6,6 +6,13 @@
     margin: 1rem 0 1rem 0;
 }
 
+.gray-tail {
+    width: 55px;
+    height: 55px;
+    position: absolute;
+    margin: -55px 0 0 -10px;
+}
+
 .gray-bubble {
     max-width: 75%;
     border-radius: 1.1rem;
@@ -14,13 +21,6 @@
     margin: 0.5rem 0.5rem 0.5rem 1.2rem;
     color: white;
     background-color: #5e5e5e;
-}
-
-.gray-tail {
-    width: 55px;
-    height: 55px;
-    position: absolute;
-    margin: -55px 0 0 -10px;
 }
 
 .tweet-text {
