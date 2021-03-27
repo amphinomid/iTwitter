@@ -27,7 +27,7 @@ class GrayMessage extends React.Component {
                 <TweetProfilePicture name={this.props.name} url={this.props.profile_picture} diameter={40} />
                 <div className="gray-message">
                     <div className="gray-message-body" style={{ position: 'relative' }}>
-                        <p style={{ margin: '-5px 0 -5px 20px', fontSize: '0.7rem', color: 'white' }}>{this.props.name}</p>
+                        <p style={{ margin: '-5px 0 -5px 27.5px', fontSize: '0.7rem', color: 'white' }}>{this.props.name}</p>
                         <div id={`bubble-${this.props.id}`} className="gray-bubble">
                             <p className="gray-tweet-text">{this.props.text}</p>
                         </div>

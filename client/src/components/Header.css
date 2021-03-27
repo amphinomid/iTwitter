@@ -6,6 +6,7 @@
     justify-content: center;
     color: white;
     background-color: rgba(35, 35, 35, 0.9);
+    backdrop-filter: blur(15px);
 }
 
 .profile-pictures-container {
