@@ -4,3 +4,4 @@
 - Libraries / packages:
     - twitter-api-client: https://www.npmjs.com/package/twitter-api-client
     - shuffle-array: https://www.npmjs.com/package/shuffle-array
+    - text-to-link: https://www.npmjs.com/package/text-to-link

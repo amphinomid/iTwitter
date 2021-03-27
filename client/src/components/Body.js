@@ -1,7 +1,6 @@
 import React from "react"
 import './Body.css'
-import GrayMessage from './GrayMessage'
-import BlueMessage from './BlueMessage'
+import Message from './Message'
 
 function Body() {
     // Temporary
@@ -18,7 +17,7 @@ function Body() {
             {!home_timeline
                 ? <p style={{ textAlign: 'center', margin: 'auto' }}></p>
                 : home_timeline.map((tweet, index) =>
-                    <GrayMessage
+                    <Message
                         key={index}
                         time={tweet.time}
                         id={tweet.id}
