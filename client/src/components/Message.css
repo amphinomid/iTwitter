@@ -23,6 +23,21 @@
     background-color: #5e5e5e;
 }
 
+.gray-likes {
+    width: '50px';
+    height: '40px';
+    position: 'absolute';
+    display: 'flex';
+    flex-direction: 'column';
+    justify-content: 'flex-end';
+    background-color: '#FFFFFF';
+}
+
 .tweet-text {
     margin: 0.7rem;
+}
+
+.like {
+    width: '35px';
+    height: '35px';
 }

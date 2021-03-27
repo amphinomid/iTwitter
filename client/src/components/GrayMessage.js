@@ -2,33 +2,10 @@ import React from 'react'
 import './Message.css'
 import TweetProfilePicture from './TweetProfilePicture'
 import TailLeft from '../assets/tail_left.png'
-
-// function GrayMessage(props) {
-//     return (
-//         <div className="gray-tweet">
-//             <TweetProfilePicture name={props.name} url={props.profile_picture} diameter={40} />
-//             <div className="gray-message">
-//                 <div className="gray-message-body">
-//                     <div id={props.id} className="gray-bubble">
-//                         <p className="tweet-text">{props.text}</p>
-//                     </div>
-//                     <div className="gray-likes"
-//                         style={{
-//                             width: '60px',
-//                             height: '40px',
-//                             position: 'absolute',
-//                             x: document.getElementById(props.id).clientWidth,
-//                             y: document.getElementById(props.id).clientTop,
-//                             backgroundColor: '#FFFFFF'
-//                         }}
-//                     >
-//                     </div>
-//                 </div>
-//                 <img className="gray-tail" src={TailLeft} alt='Tail of gray message bubble' />
-//             </div>
-//         </div>
-//     )
-// }
+import LikeLeft from '../assets/like_left_border.png'
+import LikeLeftBlue from '../assets/like_left_blue_border.png'
+import LikeRight from '../assets/like_right_border.png'
+import LikeRightBlue from '../assets/like_right_blue_border.png'
 
 class GrayMessage extends React.Component {
     componentDidMount() {
@@ -38,7 +15,7 @@ class GrayMessage extends React.Component {
             var bubble = document.getElementById(bubble_id);
             // likes[i].style.transform = `transform(${bubble.clientWidth}, ${bubble.clientHeight})`
             likes[i].style.marginTop = `${-bubble.clientHeight - 25}px`;
-            likes[i].style.marginLeft = `${bubble.clientWidth - 15}px`;
+            likes[i].style.marginLeft = `${bubble.clientWidth - 10}px`;
         }
     }
 
@@ -53,12 +30,20 @@ class GrayMessage extends React.Component {
                         </div>
                         <div id={this.props.id} className="gray-likes"
                             style={{
-                                width: '60px',
+                                width: '50px',
                                 height: '40px',
                                 position: 'absolute',
-                                backgroundColor: '#FFFFFF'
+                                display: 'flex',
+                                flexDirection: 'row-reverse',
+                                alignContent: 'center'
                             }}
                         >
+                            {(this.props.likes >= 1 && !this.props.liked) && <img src={LikeRight} className="like" style={{ marginRight: '0' }} alt="Liked by someone else" />}
+                            {(this.props.likes >= 1 && this.props.liked) && <img src={LikeRightBlue} className="like" style={{ marginRight: '0' }} alt="Liked by me" />}
+                            {(this.props.likes >= 2 && !this.props.liked) && <img src={LikeRight} className="like" style={{ marginRight: '-37px' }} alt="Liked by someone else" />}
+                            {(this.props.likes >= 2 && this.props.liked) && <img src={LikeRightBlue} className="like" style={{ marginRight: '-37px' }} alt="Liked by me" />}
+                            {(this.props.likes >= 3 && !this.props.liked) && <img src={LikeRight} className="like" style={{ marginRight: '-37px' }} alt="Liked by someone else" />}
+                            {(this.props.likes >= 3 && this.props.liked) && <img src={LikeRightBlue} className="like" style={{ marginRight: '-37px' }} alt="Liked by me" />}
                         </div>
                     </div>
                     <img className="gray-tail" src={TailLeft} alt='Tail of gray message bubble' />
