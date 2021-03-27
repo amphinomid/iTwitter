@@ -6,7 +6,6 @@ function Message(props) {
     if (props.name === OWN_NAME) {
         return (
             <BlueMessage
-                key={props.key}
                 time={props.time}
                 id={props.id}
                 text={props.text}
