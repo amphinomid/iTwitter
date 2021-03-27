@@ -24,15 +24,64 @@
 }
 
 .gray-likes {
-    width: '50px';
-    height: '40px';
-    position: 'absolute';
-    display: 'flex';
-    flex-direction: 'column';
-    justify-content: 'flex-end';
-    background-color: '#FFFFFF';
+    width: 50px;
+    height: 40px;
+    position: absolute;
+    display: flex;
+    flex-direction: row-reverse;
+    align-content: center;
+}
+
+.blue-tweet {
+    margin: 1rem 0 1rem 0;
+}
+
+.blue-message {
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: flex-end;
+    position: relative;
+}
+
+.blue-message-body {
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: flex-end;
+    position: relative;
+}
+
+.blue-tail {
+    width: 55px;
+    height: 55px;
+    position: absolute;
+    margin: -55px 0 0 0;
+}
+
+.blue-bubble {
+    max-width: 75%;
+    border-radius: 1.1rem;
+    display: flex;
+    flex-direction: column;
+    margin: 0.5rem 1.8rem 0.5rem 0.5rem;
+    color: white;
+    background-color: #4d79e7;
+}
+
+.blue-likes {
+    width: 50px;
+    height: 40px;
+    position: absolute;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
 }
 
 .tweet-text {
     margin: 0.7rem;
+}
+
+.like {
+    width: 50px;
+    height: 50px;
+    margin-top: -10px;
 }
