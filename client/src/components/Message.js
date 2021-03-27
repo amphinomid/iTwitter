@@ -18,7 +18,6 @@ function Message(props) {
     } else {
         return (
             <GrayMessage
-                key={props.key}
                 time={props.time}
                 id={props.id}
                 text={props.text}
