@@ -3,9 +3,14 @@ import './Message.css'
 import TailRight from '../assets/tail_right.png'
 import LikeLeft from '../assets/like_left_border.png'
 import LikeLeftBlue from '../assets/like_left_blue_border.png'
+let textTolink = require('text-to-link')
 
 class BlueMessage extends React.Component {
     componentDidMount() {
+        var tweet_texts = document.getElementsByClassName("blue-tweet-text");
+        for (let i = 0; i < tweet_texts.length; i++) {
+            tweet_texts[i].innerHTML = textTolink(tweet_texts[i].innerHTML, {target: "_blank", rel: "_noreferrer"})
+        }
         var likes = document.getElementsByClassName("blue-likes");
         for (let i = 0; i < likes.length; i++) {
             var bubble_id = `bubble-${likes[i].id}`;
@@ -21,7 +26,7 @@ class BlueMessage extends React.Component {
                 <div className="blue-message">
                     <div className="blue-message-body">
                         <div id={`bubble-${this.props.id}`} className="blue-bubble">
-                            <p className="tweet-text">{this.props.text}</p>
+                            <p className="blue-tweet-text">{this.props.text}</p>
                         </div>
                         <div id={this.props.id} className="blue-likes">
                             {(this.props.likes >= 1 && !this.props.liked) && <img src={LikeLeft} className="like" style={{ marginLeft: '0' }} alt="Liked by someone else" />}

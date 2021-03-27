@@ -4,9 +4,14 @@ import TweetProfilePicture from './TweetProfilePicture'
 import TailLeft from '../assets/tail_left.png'
 import LikeRight from '../assets/like_right_border.png'
 import LikeRightBlue from '../assets/like_right_blue_border.png'
+let textTolink = require('text-to-link')
 
 class GrayMessage extends React.Component {
     componentDidMount() {
+        var tweet_texts = document.getElementsByClassName("gray-tweet-text");
+        for (let i = 0; i < tweet_texts.length; i++) {
+            tweet_texts[i].innerHTML = textTolink(tweet_texts[i].innerHTML, {target: "_blank", rel: "_noreferrer"})
+        }
         var likes = document.getElementsByClassName("gray-likes");
         for (let i = 0; i < likes.length; i++) {
             var bubble_id = `bubble-${likes[i].id}`;
@@ -24,7 +29,7 @@ class GrayMessage extends React.Component {
                     <div className="gray-message-body" style={{ position: 'relative' }}>
                         <p style={{ margin: '-5px 0 -5px 20px', fontSize: '0.7rem', color: 'white' }}>{this.props.name}</p>
                         <div id={`bubble-${this.props.id}`} className="gray-bubble">
-                            <p className="tweet-text">{this.props.text}</p>
+                            <p className="gray-tweet-text">{this.props.text}</p>
                         </div>
                         <div id={this.props.id} className="gray-likes">
                             {(this.props.likes >= 1 && !this.props.liked) && <img src={LikeRight} className="like" style={{ marginRight: '0' }} alt="Liked by someone else" />}
