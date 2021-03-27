@@ -15,7 +15,7 @@ class GrayMessage extends React.Component {
             var bubble = document.getElementById(bubble_id);
             // likes[i].style.transform = `transform(${bubble.clientWidth}, ${bubble.clientHeight})`
             likes[i].style.marginTop = `${-bubble.clientHeight - 25}px`;
-            likes[i].style.marginLeft = `${bubble.clientWidth - 10}px`;
+            likes[i].style.marginLeft = `${bubble.clientWidth - 2}px`;
         }
     }
 
@@ -38,12 +38,12 @@ class GrayMessage extends React.Component {
                                 alignContent: 'center'
                             }}
                         >
-                            {(this.props.likes >= 1 && !this.props.liked) && <img src={LikeRight} className="like" style={{ width: '50px', height: '50px', marginRight: '0' }} alt="Liked by someone else" />}
-                            {(this.props.likes >= 1 && this.props.liked) && <img src={LikeRightBlue} className="like" style={{ width: '50px', height: '50px', marginRight: '0' }} alt="Liked by me" />}
-                            {(this.props.likes >= 2 && !this.props.liked) && <img src={LikeRight} className="like" style={{ width: '50px', height: '50px', marginRight: '-47px' }} alt="Liked by someone else" />}
-                            {(this.props.likes >= 2 && this.props.liked) && <img src={LikeRightBlue} className="like" style={{ width: '50px', height: '50px', marginRight: '-47px' }} alt="Liked by me" />}
-                            {(this.props.likes >= 3 && !this.props.liked) && <img src={LikeRight} className="like" style={{ width: '50px', height: '50px', marginRight: '-47px' }} alt="Liked by someone else" />}
-                            {(this.props.likes >= 3 && this.props.liked) && <img src={LikeRightBlue} className="like" style={{ width: '50px', height: '50px', marginRight: '-47px' }} alt="Liked by me" />}
+                            {(this.props.likes >= 1 && !this.props.liked) && <img src={LikeRight} className="like" style={{ width: '50px', height: '50px', marginTop: '-10px', marginRight: '0' }} alt="Liked by someone else" />}
+                            {(this.props.likes >= 1 && this.props.liked) && <img src={LikeRightBlue} className="like" style={{ width: '50px', height: '50px', marginTop: '-10px', marginRight: '0' }} alt="Liked by me" />}
+                            {(this.props.likes >= 2 && !this.props.liked) && <img src={LikeRight} className="like" style={{ width: '50px', height: '50px', marginTop: '-10px', marginRight: '-47px' }} alt="Liked by someone else" />}
+                            {(this.props.likes >= 2 && this.props.liked) && <img src={LikeRightBlue} className="like" style={{ width: '50px', height: '50px', marginTop: '-10px', marginRight: '-47px' }} alt="Liked by me" />}
+                            {(this.props.likes >= 3 && !this.props.liked) && <img src={LikeRight} className="like" style={{ width: '50px', height: '50px', marginTop: '-10px', marginRight: '-47px' }} alt="Liked by someone else" />}
+                            {(this.props.likes >= 3 && this.props.liked) && <img src={LikeRightBlue} className="like" style={{ width: '50px', height: '50px', marginTop: '-10px', marginRight: '-47px' }} alt="Liked by me" />}
                         </div>
                     </div>
                     <img className="gray-tail" src={TailLeft} alt='Tail of gray message bubble' />
