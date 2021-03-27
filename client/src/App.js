@@ -37,4 +37,5 @@ TODO:
 - If already liked Tweet, "options" pop-up should indicate so (need to make a new blue like icon without a tail)
 - Exception for two adjacent Tweets from the same person (don't display profile picture twice, and don't put a tail on first one)
 - Style scrollbar like iMessage's (thin & gray bar)
+- Start scroll position at latest Tweet
 */
