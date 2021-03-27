@@ -16,9 +16,9 @@ function Body() {
             <div className="placeholder" />
             {!home_timeline
                 ? <p style={{ textAlign: 'center', margin: 'auto' }}></p>
-                : home_timeline.map((tweet, index) =>
+                : home_timeline.map((tweet) =>
                     <Message
-                        key={index}
+                        key={tweet.id}
                         time={tweet.time}
                         id={tweet.id}
                         text={tweet.text}
