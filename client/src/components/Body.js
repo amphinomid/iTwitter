@@ -18,7 +18,7 @@ function Body() {
             {!home_timeline
                 ? <p style={{ textAlign: 'center', margin: 'auto' }}></p>
                 : home_timeline.map((tweet, index) =>
-                    <BlueMessage
+                    <GrayMessage
                         key={index}
                         time={tweet.time}
                         id={tweet.id}
