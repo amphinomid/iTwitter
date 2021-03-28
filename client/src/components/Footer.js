@@ -1,6 +1,7 @@
 import React from 'react';
 import './Footer.css'
 import autosize from 'autosize'
+import SendTweetButton from '../assets/send.png'
 
 function Footer() {
     React.useEffect(() => {
@@ -12,6 +13,7 @@ function Footer() {
     return (
         <div className="footer-container">
             <textarea className="send-tweet" placeholder="iMessage" rows={1}></textarea>
+            <input className="send-tweet-button" type="image" src={SendTweetButton} alt="Send tweet" />
         </div>
     )
 }

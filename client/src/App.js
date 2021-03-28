@@ -37,5 +37,5 @@ TODO:
 - Exception for two adjacent Tweets from the same person (don't display profile picture twice, and don't put a tail on first one)
 - Style scrollbar like iMessage's (thin & gray bar)
 - Start scroll position at latest Tweet
-- Tweeting / sending message: similar animation as iMessage
+- Tweeting / sending message: similar animation as when sending iMessage; also, should resize up
 */
