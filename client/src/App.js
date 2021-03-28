@@ -1,9 +1,17 @@
+import React from 'react'
 import './App.css'
 import Header from './components/Header'
 import Body from './components/Body'
 import Footer from './components/Footer'
+import autosize from 'autosize'
 
 function App() {
+  // React.useEffect(() => {
+  //     var send_tweet = document.getElementsByClassName("send-tweet")[0];
+  //     document.getElementsByClassName("footer-container")[0].style.height = `${send_tweet.style.height + 2}rem`;
+  //     autosize(send_tweet);
+  // }, []);
+
   return (
     <div className="container">
       <div className="imessage">
@@ -38,4 +46,7 @@ TODO:
 - Style scrollbar like iMessage's (thin & gray bar)
 - Start scroll position at latest Tweet
 - Tweeting / sending message: similar animation as when sending iMessage; also, should resize up
+- Option + Click for options
+- iMessage has threaded replies now (didn't notice this before)
+- Character limit: 280
 */

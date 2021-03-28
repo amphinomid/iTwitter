@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 import './Footer.css'
 import autosize from 'autosize'
 import SendTweetButton from '../assets/send.png'
