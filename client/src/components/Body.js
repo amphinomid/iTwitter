@@ -1,6 +1,7 @@
 import React from 'react'
 import './Body.css'
 import Message from './Message'
+import ScrollToBottom from 'react-scroll-to-bottom';
 
 function Body() {
     // Temporary
@@ -12,7 +13,7 @@ function Body() {
     }, []);
 
     return (
-        <div className="body-container">
+        <ScrollToBottom className="body-container">
             <div className="placeholder" />
             {!home_timeline
                 ? <p style={{ textAlign: 'center', margin: 'auto' }}></p>
@@ -29,7 +30,7 @@ function Body() {
                     />
                 )
             }
-        </div>
+        </ScrollToBottom>
     )
 }
 
