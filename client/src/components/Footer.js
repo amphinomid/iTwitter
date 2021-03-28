@@ -4,7 +4,6 @@ import autosize from 'autosize'
 import SendTweetButton from '../assets/send.png'
 
 function move_padding() {
-    var send_tweet = document.getElementsByClassName("send-tweet")[0];
     var send_tweet_rect = document.getElementsByClassName("send-tweet")[0].getBoundingClientRect();
     console.log(document.body.clientHeight);
     console.log(send_tweet_rect.y);
