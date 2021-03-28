@@ -1,8 +1,17 @@
-.footer-container {
+.send-tweet-container {
+    height: 2rem;
     display: flex;
     flex-direction: row-reverse;
     justify-content: center;
     position: relative;
+}
+
+.send-tweet-padding {
+    width: 40%;
+    min-width: 500px;
+    height: 15px;
+    position: absolute;
+    background-color: black;
 }
 
 .send-tweet {
