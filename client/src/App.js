@@ -39,6 +39,7 @@ TODO:
 - Tweeting / sending message: similar animation as when sending iMessage
 - Option + Click for options
 - iMessage has threaded replies now (didn't notice this before) — actually, though, might exclude reply functionality since API uses
-  exclude_replies=true; change to retweet (make new set of options icons)
+  exclude_replies=true; change to retweet (caveat is you can only retweet once as well, but too lazy to make extra icons for that...
+  could probably just resort to retweet twice = no effect)
 - Character limit: 280
 */
