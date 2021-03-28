@@ -27,23 +27,24 @@ export default App
 /*
 TODO:
 - LIKES
-    - Click message for options (reduces friction)
-    - Update likes when infinite-scroll
+  - Tap own like to remove
+  - Update likes when infinite-scroll
 - MESSAGES
-    - Double-tap to like
-    - 280-character limit
-    - Exception for two adjacent Tweets from the same person (don't display profile picture, and don't put a tail)
-    - Swipe left to see timestamps on messages
-    - Display timestamp in middle of screen if sufficient time elapsed between two Tweets
-    - Also display timestamp before the oldest Tweet of session
-    - Tweeting / sending message: similar animation as when sending iMessage
-    - No reply functionality, no retweets
-      - Perhaps add retweet functionality later (retweet twice = no effect); see icons in "options-unused"
+  - 280-character limit
+  - Exception for two adjacent Tweets from the same person (don't display profile picture, and don't put a tail)
+  - Swipe left to see timestamps on messages
+  - Display timestamp in middle of screen if sufficient time elapsed between two Tweets
+  - Also display timestamp before the oldest Tweet of session
+  - Tweeting / sending message: similar animation as when sending iMessage
+  - No reply functionality, no retweets
+    - Perhaps add retweet functionality later (retweet twice = no effect); see icons in "options-unused"
 - USERS
-    - Maybe add unfollowing functionality — "remove from groupchat" — but this might be weird because removing from groupchat is
-      two-way, unfollowing isn't
+  - Maybe add unfollowing functionality — "remove from groupchat" — but this might be weird because removing from groupchat is
+    two-way, unfollowing isn't
 - SCROLL
-    - Infinite: display loading icons while retrieving new Tweets (upon scrolling to bottom)
-    - Nonlinear - decrease speed over duration of single scroll
-    - Style scrollbar like iMessage's (thin & gray bar)
+  - Infinite: display loading icons while retrieving new Tweets (upon scrolling to bottom)
+  - Nonlinear - decrease speed over duration of single scroll
+  - Style scrollbar like iMessage's (thin & gray bar)
+- OVERALL
+  - After the "look" of the app works, connect everything to Twitter api client
 */
