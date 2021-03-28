@@ -22,6 +22,10 @@ class BlueMessage extends React.Component {
         }
     }
 
+    removeLike(id) {
+        
+    }
+
     componentDidMount() {
         var tweet_texts = document.getElementsByClassName("blue-tweet-text");
         for (let i = 0; i < tweet_texts.length; i++) {
