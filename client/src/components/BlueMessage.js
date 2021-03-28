@@ -17,6 +17,18 @@ class BlueMessage extends React.Component {
             var bubble = document.getElementById(bubble_id);
             likes[i].style.marginBottom = `${bubble.clientHeight - 16}px`;
             likes[i].style.marginRight = `${bubble.clientWidth + 7}px`;
+
+            var first_like = document.getElementById(`first-like-${this.props.id}`);
+            var second_like = document.getElementById(`second-like-${this.props.id}`);
+            var third_like = document.getElementById(`third-like-${this.props.id}`);
+
+            if (third_like.style.visibility == 'visible') {
+
+            } else if (second_like.style.visibility == 'visible') {
+
+            } else if (first_like.style.visibility == 'visible') {
+                
+            }
         }
     }
 
@@ -29,12 +41,9 @@ class BlueMessage extends React.Component {
                             <p className="blue-tweet-text">{this.props.text}</p>
                         </div>
                         <div id={this.props.id} className="blue-likes">
-                            {(this.props.likes >= 1 && !this.props.liked) && <img src={LikeLeft} className="like" style={{ marginLeft: '0' }} alt="Liked by someone else" />}
-                            {(this.props.likes >= 1 && this.props.liked) && <img src={LikeLeftBlue} className="like" style={{ marginLeft: '0' }} alt="Liked by me" />}
-                            {(this.props.likes >= 2 && !this.props.liked) && <img src={LikeLeft} className="like" style={{ marginLeft: '-47px' }} alt="Liked by someone else" />}
-                            {(this.props.likes >= 2 && this.props.liked) && <img src={LikeLeftBlue} className="like" style={{ marginLeft: '-47px' }} alt="Liked by me" />}
-                            {(this.props.likes >= 3 && !this.props.liked) && <img src={LikeLeft} className="like" style={{ marginLeft: '-47px' }} alt="Liked by someone else" />}
-                            {(this.props.likes >= 3 && this.props.liked) && <img src={LikeLeftBlue} className="like" style={{ marginLeft: '-47px' }} alt="Liked by me" />}
+                            {(this.props.likes >= 1) && <img src={LikeLeft} id={`first-like-${this.props.id}`} className="first-like" style={{ marginLeft: '0', visibility: 'visible' }} alt="Like" />}
+                            {(this.props.likes >= 2) && <img src={LikeLeft} id={`second-like-${this.props.id}`} className="second-like" style={{ marginLeft: '-47px', visibility: 'visible' }} alt="Like" />}
+                            {(this.props.likes >= 3) && <img src={LikeLeft} id={`third-like-${this.props.id}`} className="third-like" style={{ marginLeft: '-47px', visibility: 'visible' }} alt="Like" />}
                         </div>
                     </div>
                     <img className="blue-tail" src={TailRight} alt='Tail of blue message bubble' />
