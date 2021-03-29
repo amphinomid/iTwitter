@@ -23,7 +23,7 @@
     position: absolute;
     bottom: 0;
     margin-bottom: -4px;
-    padding: 0.5rem 1rem 0.5rem 1rem;
+    padding: 0.5rem 2.7rem 0.5rem 1rem;
     color: white;
     background-color: black;
     resize: none;
@@ -37,5 +37,4 @@
     right: 0;
     bottom: 0;
     margin-bottom: -7.5px;
-    padding-right: 2.5%;
 }
