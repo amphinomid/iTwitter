@@ -78,7 +78,7 @@ class BlueMessage extends React.Component {
                         <img src={this.props.liked ? LikeLeftBlue : LikeLeft} id={`second-like-${this.props.id}`} className="second-like" onClick={() => { this.removeLike(this.props.id, this.props.likes) }} style={{ marginLeft: '-47px', visibility: this.props.likes >= 2 ? 'visible' : 'hidden' }} alt="Like" />
                         <img src={this.props.liked ? LikeLeftBlue : LikeLeft} id={`third-like-${this.props.id}`} className="third-like" onClick={() => { this.removeLike(this.props.id, this.props.likes) }} style={{ marginLeft: '-47px', visibility: this.props.likes >= 3 ? 'visible' : 'hidden' }} alt="Like" />
                     </div>
-                    <img className="blue-tail" src={TailRight} alt='Tail of blue message bubble' />
+                    {this.props.profile_picture !== 'repeat' && <img className="blue-tail" src={TailRight} alt='Tail of blue message bubble' />}
                 </div>
             </div>
         )

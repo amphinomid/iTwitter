@@ -124,6 +124,20 @@ function update_Tweet(tweet) {
 //   return tweet.favorited;
 // }
 
+// Handle adjacent Tweets from same person
+function handle_streaks() {
+  for (let i = 1; i < home_timeline.length; i++) {
+    if (home_timeline[i].name === home_timeline[i - 1].name) {
+      home_timeline[i - 1].profile_picture = 'repeat';
+    }
+  }
+  for (let i = home_timeline.length - 2; i >= 0; i--) {
+    if (home_timeline[i].name === home_timeline[i + 1].name) {
+      home_timeline[i + 1].name = 'repeat';
+    }
+  }
+}
+
 // Get latest home timeline of Tweets
 async function get_home_timeline() {
   try {
@@ -135,11 +149,12 @@ async function get_home_timeline() {
       if (data[i].full_text.substring(0, 2) != "RT") {
         var cur_tweet = new Tweet(data[i].created_at, data[i].id, data[i].full_text, data[i].user.screen_name,
           data[i].user.profile_image_url_https, data[i].favorite_count, data[i].favorited);
-      }
-      if (!update_Tweet(cur_tweet)) {
-        home_timeline.push(cur_tweet);
+        if (!update_Tweet(cur_tweet)) {
+          home_timeline.push(cur_tweet);
+        }
       }
     }
+    handle_streaks();
     app.get("/home_timeline", (req, res) => {
       res.json({ message: home_timeline });
     });

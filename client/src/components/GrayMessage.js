@@ -63,9 +63,9 @@ class GrayMessage extends React.Component {
     render() {
         return (
             <div className="gray-tweet">
-                <TweetProfilePicture name={this.props.name} url={this.props.profile_picture} diameter={40} />
+                <TweetProfilePicture name={this.props.name} url={this.props.profile_picture} repeat={this.props.profile_picture} diameter={40} />
                 <div className="gray-message" onDoubleClick={() => { this.addLike(this.props.id) }}>
-                    <p style={{ margin: '-5px 0 -5px 27.5px', fontSize: '0.7rem', color: 'white' }}>{this.props.name}</p>
+                    {this.props.name !== 'repeat' && <p style={{ margin: '-5px 0 -5px 27.5px', fontSize: '0.7rem', color: 'white' }}>{this.props.name}</p>}
                     <div className="gray-message-body" style={{ position: 'relative' }}>
                         {/* <p style={{ margin: '-5px 0 -5px 27.5px', fontSize: '0.7rem', color: 'white' }}>{this.props.name}</p> */}
                         <div id={`bubble-${this.props.id}`} className="gray-bubble">
@@ -82,7 +82,7 @@ class GrayMessage extends React.Component {
                         <img src={this.props.liked ? LikeRightBlue : LikeRight} id={`second-like-${this.props.id}`} className="second-like" onClick={() => { this.removeLike(this.props.id, this.props.likes) }} style={{ marginRight: '-47px', visibility: this.props.likes >= 2 ? 'visible' : 'hidden' }} alt="Like" />
                         <img src={this.props.liked ? LikeRightBlue : LikeRight} id={`third-like-${this.props.id}`} className="third-like" onClick={() => { this.removeLike(this.props.id, this.props.likes) }} style={{ marginRight: '-47px', visibility: this.props.likes >= 3 ? 'visible' : 'hidden' }} alt="Like" />
                     </div>
-                    <img className="gray-tail" src={TailLeft} alt='Tail of gray message bubble' />
+                    {this.props.profile_picture !== 'repeat' && <img className="gray-tail" src={TailLeft} alt='Tail of gray message bubble' />}
                 </div>
             </div>
         )

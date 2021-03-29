@@ -29,7 +29,6 @@ TODO:
 - LIKES
   - Update likes when infinite-scroll
 - MESSAGES
-  - Exception for two adjacent Tweets from the same person (don't display profile picture, and don't put a tail)
   - Swipe left to see timestamps on messages
   - Display timestamp in middle of screen if sufficient time elapsed between two Tweets
   - Also display timestamp before the oldest Tweet of session
@@ -47,4 +46,5 @@ TODO:
     - Perhaps add retweet functionality later (retweet twice = no effect); see icons in "options-unused"
   - Maybe add unfollowing functionality — "remove from groupchat" — but this might be weird because removing from groupchat is
     two-way, unfollowing isn't
+  - Might look better if adjacent Tweets from same user are more closely-spaced
 */
