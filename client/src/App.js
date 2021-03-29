@@ -33,12 +33,11 @@ TODO:
   - Display timestamp in middle of screen if sufficient time elapsed between two Tweets
   - Also display timestamp before the oldest Tweet of session
   - Tweeting / sending message: similar animation as when sending iMessage
-- USERS
 - SCROLL
   - Infinite: display loading icons while retrieving new Tweets (upon scrolling to bottom)
   - Nonlinear - decrease speed over duration of single scroll
   - Style scrollbar like iMessage's (thin & gray bar)
-- STYLE & OVERALL
+- STYLE & OVERALL & MINOR
   - After the "look" of the app works, connect everything to Twitter api client
     - Validate removeLike works after connecting everything - currently doesn't, because depends on actual like numbers
   - Item nesting in GrayMessage.js and BlueMessage.js and corresponding CSS in Message.css are quite messy, can be cleaned up
