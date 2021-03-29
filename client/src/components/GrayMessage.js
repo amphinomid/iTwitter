@@ -24,6 +24,7 @@ class GrayMessage extends React.Component {
             first_like.src = LikeRightBlue;
             first_like.style.visibility = 'visible';
         }
+        document.getSelection().removeAllRanges();
     }
 
     removeLike(id, likes) {
@@ -67,7 +68,7 @@ class GrayMessage extends React.Component {
                     <div className="gray-message-body" style={{ position: 'relative' }}>
                         {/* <p style={{ margin: '-5px 0 -5px 27.5px', fontSize: '0.7rem', color: 'white' }}>{this.props.name}</p> */}
                         <div id={`bubble-${this.props.id}`} className="gray-bubble">
-                            <p className="gray-tweet-text">{this.props.text}</p>
+                            <p id={`text-${this.props.id}`} className="gray-tweet-text">{this.props.text}</p>
                         </div>
                         {/* <div id={this.props.id} className="gray-likes">
                             <img src={this.props.liked? LikeRightBlue : LikeRight} id={`first-like-${this.props.id}`} className="first-like" style={{ marginRight: '0', visibility: this.props.likes >= 1 ? 'visible' : 'hidden' }} alt="Like" />

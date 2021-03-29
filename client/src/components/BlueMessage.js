@@ -23,6 +23,7 @@ class BlueMessage extends React.Component {
             first_like.src = LikeLeftBlue;
             first_like.style.visibility = 'visible';
         }
+        document.getSelection().removeAllRanges();
     }
 
     removeLike(id, likes) {
@@ -63,7 +64,7 @@ class BlueMessage extends React.Component {
                 <div className="blue-message" onDoubleClick={() => { this.addLike(this.props.id) }}>
                     <div className="blue-message-body">
                         <div id={`bubble-${this.props.id}`} className="blue-bubble">
-                            <p className="blue-tweet-text">{this.props.text}</p>
+                            <p id={`text-${this.props.id}`} className="blue-tweet-text">{this.props.text}</p>
                         </div>
                         {/* <div id={this.props.id} className="blue-likes">
                             <img src={this.props.liked? LikeLeftBlue : LikeLeft} id={`first-like-${this.props.id}`} className="first-like" style={{ marginLeft: '0', visibility: this.props.likes >= 1 ? 'visible' : 'hidden' }} alt="Like" />
