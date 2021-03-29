@@ -26,8 +26,22 @@ class GrayMessage extends React.Component {
         }
     }
 
-    removeLike(id) {
-
+    removeLike(id, likes) {
+        var first_like = document.getElementById(`first-like-${id}`);
+        var second_like = document.getElementById(`second-like-${id}`);
+        var third_like = document.getElementById(`third-like-${id}`);
+        if (likes > 3 && third_like.src.includes(LikeRightBlue) && third_like.style.visibility === 'visible') {
+            third_like.src = LikeRight;
+        } else if (likes === 3 && third_like.src.includes(LikeRightBlue) && third_like.style.visibility === 'visible') {
+            third_like.src = LikeRight;
+            third_like.style.visibility = 'hidden';
+        } else if (likes === 2 && second_like.src.includes(LikeRightBlue) && second_like.style.visibility === 'visible') {
+            second_like.src = LikeRight;
+            second_like.style.visibility = 'hidden';
+        } else if (likes === 1 && first_like.src.includes(LikeRightBlue) && first_like.style.visibility === 'visible') {
+            first_like.src = LikeRight;
+            first_like.style.visibility = 'hidden';
+        }
     }
 
     componentDidMount() {
@@ -62,9 +76,9 @@ class GrayMessage extends React.Component {
                         </div> */}
                     </div>
                     <div id={this.props.id} className="gray-likes">
-                        <img src={this.props.liked ? LikeRightBlue : LikeRight} id={`first-like-${this.props.id}`} className="first-like" style={{ marginRight: '0', visibility: this.props.likes >= 1 ? 'visible' : 'hidden' }} alt="Like" />
-                        <img src={this.props.liked ? LikeRightBlue : LikeRight} id={`second-like-${this.props.id}`} className="second-like" style={{ marginRight: '-47px', visibility: this.props.likes >= 2 ? 'visible' : 'hidden' }} alt="Like" />
-                        <img src={this.props.liked ? LikeRightBlue : LikeRight} id={`third-like-${this.props.id}`} className="third-like" style={{ marginRight: '-47px', visibility: this.props.likes >= 3 ? 'visible' : 'hidden' }} alt="Like" />
+                        <img src={this.props.liked ? LikeRightBlue : LikeRight} id={`first-like-${this.props.id}`} className="first-like" onClick={() => { this.removeLike(this.props.id, this.props.likes) }} style={{ marginRight: '0', visibility: this.props.likes >= 1 ? 'visible' : 'hidden' }} alt="Like" />
+                        <img src={this.props.liked ? LikeRightBlue : LikeRight} id={`second-like-${this.props.id}`} className="second-like" onClick={() => { this.removeLike(this.props.id, this.props.likes) }} style={{ marginRight: '-47px', visibility: this.props.likes >= 2 ? 'visible' : 'hidden' }} alt="Like" />
+                        <img src={this.props.liked ? LikeRightBlue : LikeRight} id={`third-like-${this.props.id}`} className="third-like" onClick={() => { this.removeLike(this.props.id, this.props.likes) }} style={{ marginRight: '-47px', visibility: this.props.likes >= 3 ? 'visible' : 'hidden' }} alt="Like" />
                     </div>
                     <img className="gray-tail" src={TailLeft} alt='Tail of gray message bubble' />
                 </div>

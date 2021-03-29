@@ -27,7 +27,6 @@ export default App
 /*
 TODO:
 - LIKES
-  - Tap own like to remove
   - Update likes when infinite-scroll
 - MESSAGES
   - 280-character limit
@@ -47,5 +46,6 @@ TODO:
   - Style scrollbar like iMessage's (thin & gray bar)
 - STYLE & OVERALL
   - After the "look" of the app works, connect everything to Twitter api client
+    - Validate removeLike works after connecting everything - currently doesn't, because depends on actual like numbers
   - Item nesting in GrayMessage.js and BlueMessage.js and corresponding CSS in Message.css are quite messy, can be cleaned up
 */
