@@ -7,3 +7,4 @@
     - [text-to-link](https://www.npmjs.com/package/text-to-link)
     - [autosize](https://www.npmjs.com/package/autosize)
     - [react-scroll-to-bottom](https://www.npmjs.com/package/react-scroll-to-bottom)
+    - [he](https://www.npmjs.com/package/he)

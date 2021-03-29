@@ -3,7 +3,8 @@ import './Message.css'
 import TailRight from '../assets/tail_right.png'
 import LikeLeft from '../assets/like_left_border.png'
 import LikeLeftBlue from '../assets/like_left_blue_border.png'
-let textTolink = require('text-to-link')
+import textTolink from 'text-to-link'
+import he from 'he'
 
 class BlueMessage extends React.Component {
     addLike(id) {
@@ -47,7 +48,7 @@ class BlueMessage extends React.Component {
     componentDidMount() {
         var tweet_texts = document.getElementsByClassName("blue-tweet-text");
         for (let i = 0; i < tweet_texts.length; i++) {
-            tweet_texts[i].innerHTML = textTolink(tweet_texts[i].innerHTML, { target: "_blank", rel: "_noreferrer" })
+            tweet_texts[i].innerHTML = he.decode(textTolink(tweet_texts[i].innerHTML, { target: "_blank", rel: "_noreferrer" }))
         }
         var likes = document.getElementsByClassName("blue-likes");
         for (let i = 0; i < likes.length; i++) {
