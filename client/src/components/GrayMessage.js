@@ -26,10 +26,14 @@ class GrayMessage extends React.Component {
         }
     }
 
+    removeLike(id) {
+
+    }
+
     componentDidMount() {
         var tweet_texts = document.getElementsByClassName("gray-tweet-text");
         for (let i = 0; i < tweet_texts.length; i++) {
-            tweet_texts[i].innerHTML = textTolink(tweet_texts[i].innerHTML, {target: "_blank", rel: "_noreferrer"})
+            tweet_texts[i].innerHTML = textTolink(tweet_texts[i].innerHTML, { target: "_blank", rel: "_noreferrer" })
         }
         var likes = document.getElementsByClassName("gray-likes");
         for (let i = 0; i < likes.length; i++) {
@@ -44,17 +48,23 @@ class GrayMessage extends React.Component {
         return (
             <div className="gray-tweet">
                 <TweetProfilePicture name={this.props.name} url={this.props.profile_picture} diameter={40} />
-                <div className="gray-message" onDoubleClick={() => {this.addLike(this.props.id)}}>
+                <div className="gray-message" onDoubleClick={() => { this.addLike(this.props.id) }}>
+                    <p style={{ margin: '-5px 0 -5px 27.5px', fontSize: '0.7rem', color: 'white' }}>{this.props.name}</p>
                     <div className="gray-message-body" style={{ position: 'relative' }}>
-                        <p style={{ margin: '-5px 0 -5px 27.5px', fontSize: '0.7rem', color: 'white' }}>{this.props.name}</p>
+                        {/* <p style={{ margin: '-5px 0 -5px 27.5px', fontSize: '0.7rem', color: 'white' }}>{this.props.name}</p> */}
                         <div id={`bubble-${this.props.id}`} className="gray-bubble">
                             <p className="gray-tweet-text">{this.props.text}</p>
                         </div>
-                        <div id={this.props.id} className="gray-likes">
+                        {/* <div id={this.props.id} className="gray-likes">
                             <img src={this.props.liked? LikeRightBlue : LikeRight} id={`first-like-${this.props.id}`} className="first-like" style={{ marginRight: '0', visibility: this.props.likes >= 1 ? 'visible' : 'hidden' }} alt="Like" />
                             <img src={this.props.liked? LikeRightBlue : LikeRight} id={`second-like-${this.props.id}`} className="second-like" style={{ marginRight: '-47px', visibility: this.props.likes >= 2 ? 'visible' : 'hidden' }} alt="Like" />
                             <img src={this.props.liked? LikeRightBlue : LikeRight} id={`third-like-${this.props.id}`} className="third-like" style={{ marginRight: '-47px', visibility: this.props.likes >= 3 ? 'visible' : 'hidden' }} alt="Like" />
-                        </div>
+                        </div> */}
+                    </div>
+                    <div id={this.props.id} className="gray-likes">
+                        <img src={this.props.liked ? LikeRightBlue : LikeRight} id={`first-like-${this.props.id}`} className="first-like" style={{ marginRight: '0', visibility: this.props.likes >= 1 ? 'visible' : 'hidden' }} alt="Like" />
+                        <img src={this.props.liked ? LikeRightBlue : LikeRight} id={`second-like-${this.props.id}`} className="second-like" style={{ marginRight: '-47px', visibility: this.props.likes >= 2 ? 'visible' : 'hidden' }} alt="Like" />
+                        <img src={this.props.liked ? LikeRightBlue : LikeRight} id={`third-like-${this.props.id}`} className="third-like" style={{ marginRight: '-47px', visibility: this.props.likes >= 3 ? 'visible' : 'hidden' }} alt="Like" />
                     </div>
                     <img className="gray-tail" src={TailLeft} alt='Tail of gray message bubble' />
                 </div>

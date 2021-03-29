@@ -3,7 +3,7 @@ const { TwitterClient } = require('twitter-api-client');
 const express = require('express');
 const shuffle = require('shuffle-array');
 const FRIEND_CURSOR_COUNT = 200;
-const HOME_TIMELINE_COUNT = 20;
+const HOME_TIMELINE_COUNT = 40;
 const app = express();
 const PORT = process.env.PORT || 3001;
 
@@ -41,7 +41,7 @@ var home_timeline = new Array()
 // Print current-following users (for debugging)
 async function print_friends() {
   console.log("# of friends: " + friends.length);
-  friends.forEach(function(friend) {
+  friends.forEach(function (friend) {
     console.log(friend);
   })
   console.log("\n");
@@ -76,7 +76,7 @@ async function get_friends() {
 // Print Tweets in home timeline (for debugging)
 async function print_home_timeline() {
   console.log("# of Tweets: " + home_timeline.length);
-  home_timeline.forEach(function(tweet) {
+  home_timeline.forEach(function (tweet) {
     console.log(tweet);
   })
   console.log("\n");
@@ -94,35 +94,35 @@ function update_Tweet(tweet) {
 }
 
 // Get full text (including full RT, if applicable)
-function get_full_text(tweet) {
-  if (tweet.full_text.substring(0, 2) == "RT") {
-    var colon_index = 0;
-    for (let i = 0; i < tweet.full_text.length; i++) {
-      if (tweet.full_text[i] == ':') {
-        colon_index = i;
-        break;
-      }
-    }
-    return (tweet.full_text.substring(0, colon_index + 2) + tweet.retweeted_status.full_text);
-  }
-  return tweet.full_text;
-}
+// function get_full_text(tweet) {
+//   if (tweet.full_text.substring(0, 2) == "RT") {
+//     var colon_index = 0;
+//     for (let i = 0; i < tweet.full_text.length; i++) {
+//       if (tweet.full_text[i] == ':') {
+//         colon_index = i;
+//         break;
+//       }
+//     }
+//     return (tweet.full_text.substring(0, colon_index + 2) + tweet.retweeted_status.full_text);
+//   }
+//   return tweet.full_text;
+// }
 
 // Get likes (RT likes, if applicable)
-function get_likes(tweet) {
-  if (tweet.full_text.substring(0, 2) == "RT") {
-    return tweet.retweeted_status.favorite_count;
-  }
-  return tweet.favorite_count;
-}
+// function get_likes(tweet) {
+//   if (tweet.full_text.substring(0, 2) == "RT") {
+//     return tweet.retweeted_status.favorite_count;
+//   }
+//   return tweet.favorite_count;
+// }
 
 // Get liked (RT liked, if applicable)
-function get_liked(tweet) {
-  if (tweet.full_text.substring(0, 2) == "RT") {
-    return tweet.retweeted_status.favorited;
-  }
-  return tweet.favorited;
-}
+// function get_liked(tweet) {
+//   if (tweet.full_text.substring(0, 2) == "RT") {
+//     return tweet.retweeted_status.favorited;
+//   }
+//   return tweet.favorited;
+// }
 
 // Get latest home timeline of Tweets
 async function get_home_timeline() {
@@ -130,8 +130,12 @@ async function get_home_timeline() {
     var params = { count: HOME_TIMELINE_COUNT, exclude_replies: true, tweet_mode: 'extended' };
     const data = await twitterClient.tweets.statusesHomeTimeline(params);
     for (let i = data.length - 1; i >= 0; i--) {
-      var cur_tweet = new Tweet(data[i].created_at, data[i].id, get_full_text(data[i]), data[i].user.screen_name,
-        data[i].user.profile_image_url_https, get_likes(data[i]), get_liked(data[i]));
+      // var cur_tweet = new Tweet(data[i].created_at, data[i].id, get_full_text(data[i]), data[i].user.screen_name,
+      //   data[i].user.profile_image_url_https, get_likes(data[i]), get_liked(data[i]));
+      if (data[i].full_text.substring(0, 2) != "RT") {
+        var cur_tweet = new Tweet(data[i].created_at, data[i].id, data[i].full_text, data[i].user.screen_name,
+          data[i].user.profile_image_url_https, data[i].favorite_count, data[i].favorited);
+      }
       if (!update_Tweet(cur_tweet)) {
         home_timeline.push(cur_tweet);
       }

@@ -45,6 +45,7 @@ TODO:
   - Infinite: display loading icons while retrieving new Tweets (upon scrolling to bottom)
   - Nonlinear - decrease speed over duration of single scroll
   - Style scrollbar like iMessage's (thin & gray bar)
-- OVERALL
+- STYLE & OVERALL
   - After the "look" of the app works, connect everything to Twitter api client
+  - Item nesting in GrayMessage.js and BlueMessage.js and corresponding CSS in Message.css are quite messy, can be cleaned up
 */
