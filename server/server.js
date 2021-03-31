@@ -4,6 +4,7 @@ const express = require('express');
 const shuffle = require('shuffle-array');
 const FRIEND_CURSOR_COUNT = 200;
 const HOME_TIMELINE_COUNT = 40;
+const ELAPSED_TIME = 15 * 60 * 1000;
 const app = express();
 const PORT = process.env.PORT || 3001;
 
@@ -124,15 +125,23 @@ function update_Tweet(tweet) {
 //   return tweet.favorited;
 // }
 
-// Handle adjacent Tweets from same person
+// Handle adjacent Tweets from same person and / or with sufficient time elapsed between them
 function handle_streaks() {
+  for (let i = home_timeline.length - 2; i >= 0; i--) {
+    var cur_date = home_timeline[i].time;
+    var prev_date = home_timeline[i + 1].time;
+    console.log(cur_date - prev_date);
+    if (Math.abs(cur_date - prev_date) < ELAPSED_TIME) {
+      home_timeline[i + 1].time = 'repeat';
+    }
+  }
   for (let i = 1; i < home_timeline.length; i++) {
-    if (home_timeline[i].name === home_timeline[i - 1].name) {
+    if (home_timeline[i].name === home_timeline[i - 1].name && home_timeline[i - 1].time === 'repeat') {
       home_timeline[i - 1].profile_picture = 'repeat';
     }
   }
   for (let i = home_timeline.length - 2; i >= 0; i--) {
-    if (home_timeline[i].name === home_timeline[i + 1].name) {
+    if (home_timeline[i].name === home_timeline[i + 1].name && home_timeline[i + 1].time === 'repeat') {
       home_timeline[i + 1].name = 'repeat';
     }
   }
@@ -147,7 +156,7 @@ async function get_home_timeline() {
       // var cur_tweet = new Tweet(data[i].created_at, data[i].id, get_full_text(data[i]), data[i].user.screen_name,
       //   data[i].user.profile_image_url_https, get_likes(data[i]), get_liked(data[i]));
       if (data[i].full_text.substring(0, 2) != "RT") {
-        var cur_tweet = new Tweet(data[i].created_at, data[i].id, data[i].full_text, data[i].user.screen_name,
+        var cur_tweet = new Tweet(Date.parse(data[i].created_at), data[i].id, data[i].full_text, data[i].user.screen_name,
           data[i].user.profile_image_url_https, data[i].favorite_count, data[i].favorited);
         if (!update_Tweet(cur_tweet)) {
           home_timeline.push(cur_tweet);
