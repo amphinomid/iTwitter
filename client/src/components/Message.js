@@ -13,7 +13,6 @@ function format_time(timestamp) {
 }
 
 function Message(props) {
-    console.log(props.time);
     if (props.name === OWN_NAME) {
         return (
             <div style={{ display: 'flex', flexDirection: 'column' }}>

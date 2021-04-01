@@ -23,6 +23,7 @@ function send_tweet() {
 
 function Footer() {
     React.useEffect(() => {
+        update_send_tweet();
         autosize(document.getElementsByClassName("send-tweet")[0]);
     }, []);
 
