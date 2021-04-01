@@ -7,21 +7,19 @@ var initial_load = 0;
 var last_scroll = 0;
 
 class Body extends React.Component {
-    // Temporary
-    // const [home_timeline, setData] = React.useState(null);
-    // React.useEffect(() => {
-    //     fetch("/home_timeline")
-    //         .then((res) => res.json())
-    //         .then((home_timeline) => setData(home_timeline.message));
-    //     window.addEventListener('scroll', check_scroll, true);
-    //     return () => window.removeEventListener('scroll', check_scroll, true);
-    // }, []);
-
     constructor(props) {
         super(props);
         this.state = {
             timeline: []
         };
+        this.update_timeline = this.update_timeline.bind(this);
+    }
+
+    update_timeline() {
+        console.log('Updating timeline...');
+        fetch("/home_timeline")
+            .then((res) => res.json())
+            .then((home_timeline) => this.setState({ timeline: home_timeline.message }));
     }
 
     check_scroll() {
@@ -35,15 +33,16 @@ class Body extends React.Component {
         last_scroll = scroll_check_rect.bottom;
     }
 
-    update_timeline() {
-        console.log('Updating timeline...');
-        fetch("/home_timeline")
-            .then((res) => res.json())
-            .then((home_timeline) => this.setState({ timeline: home_timeline.message }));
+    componentDidMount() {
+        this.update_timeline();
+        window.addEventListener('scroll', () => this.check_scroll(), true);
+    }
+
+    componentWillUnmount() {
+        window.removeEventListener('scroll', () => this.check_scroll(), true);
     }
 
     render() {
-        this.update_timeline();
         return (
             <ScrollToBottom className="body-container" >
                 <div className="placeholder" />
