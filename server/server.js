@@ -3,7 +3,7 @@ const { TwitterClient } = require('twitter-api-client');
 const express = require('express');
 const shuffle = require('shuffle-array');
 const FRIEND_CURSOR_COUNT = 200;
-const HOME_TIMELINE_COUNT = 40;
+const HOME_TIMELINE_COUNT = 75;
 const ELAPSED_TIME = 15 * 60 * 1000;
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -50,11 +50,11 @@ async function print_friends() {
 
 // Get currently-following users
 async function get_friends() {
+  console.log('Getting friends...');
   try {
     var params = { cursor: -1, count: FRIEND_CURSOR_COUNT };
     while (params.cursor != 0) {
       const data = await twitterClient.accountsAndUsers.friendsList(params);
-      console.log(data.users.length);
       for (let i = 0; i < data.users.length; i++) {
         var prev_size = friends_set.size;
         friends_set.add(data.users[i].profile_image_url_https);
@@ -65,10 +65,7 @@ async function get_friends() {
       params.cursor = data.next_cursor;
     }
     shuffle(friends);
-    print_friends();
-    // app.get("/friends", (req, res) => {
-    //   res.json({ message: friends });
-    // });
+    //print_friends();
   } catch (e) {
     console.log("Error: ", e);
   }
@@ -130,7 +127,6 @@ function handle_streaks() {
   for (let i = home_timeline.length - 2; i >= 0; i--) {
     var cur_date = home_timeline[i].time;
     var prev_date = home_timeline[i + 1].time;
-    console.log(cur_date - prev_date);
     if (Math.abs(cur_date - prev_date) < ELAPSED_TIME) {
       home_timeline[i + 1].time = 'repeat';
     }
@@ -149,6 +145,7 @@ function handle_streaks() {
 
 // Get latest home timeline of Tweets
 async function get_home_timeline() {
+  console.log('Getting home timeline...');
   try {
     var params = { count: HOME_TIMELINE_COUNT, exclude_replies: true, tweet_mode: 'extended' };
     const data = await twitterClient.tweets.statusesHomeTimeline(params);
@@ -164,10 +161,7 @@ async function get_home_timeline() {
       }
     }
     handle_streaks();
-    print_home_timeline();
-    // app.get("/home_timeline", (req, res) => {
-    //   res.json({ message: home_timeline });
-    // });
+    //print_home_timeline();
   } catch (e) {
     console.log("Error: ", e);
   }

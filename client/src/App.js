@@ -29,7 +29,7 @@ TODO:
 - SCROLL
   - Infinite: display loading icons while retrieving new Tweets (upon scrolling to bottom)
 - STYLE & OVERALL
-  - After the "look" of the app works, connect everything to Twitter api client
+  - After the "look" of the app works, connect everything to Twitter api client (e.g. updating timeline, liking, Tweeting)
     - Validate removeLike works after connecting everything - currently doesn't, because depends on actual like numbers
 - FUTURE
   - Item nesting in GrayMessage.js and BlueMessage.js and corresponding CSS in Message.css are quite messy, can be cleaned up
