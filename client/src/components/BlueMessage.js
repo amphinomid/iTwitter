@@ -67,11 +67,6 @@ class BlueMessage extends React.Component {
                         <div id={`bubble-${this.props.id}`} className="blue-bubble">
                             <p id={`text-${this.props.id}`} className="blue-tweet-text">{this.props.text}</p>
                         </div>
-                        {/* <div id={this.props.id} className="blue-likes">
-                            <img src={this.props.liked? LikeLeftBlue : LikeLeft} id={`first-like-${this.props.id}`} className="first-like" style={{ marginLeft: '0', visibility: this.props.likes >= 1 ? 'visible' : 'hidden' }} alt="Like" />
-                            <img src={this.props.liked? LikeLeftBlue : LikeLeft} id={`second-like-${this.props.id}`} className="second-like" style={{ marginLeft: '-47px', visibility: this.props.likes >= 2 ? 'visible' : 'hidden' }} alt="Like" />
-                            <img src={this.props.liked? LikeLeftBlue : LikeLeft} id={`third-like-${this.props.id}`} className="third-like" style={{ marginLeft: '-47px', visibility: this.props.likes >= 3 ? 'visible' : 'hidden' }} alt="Like" />
-                        </div> */}
                     </div>
                     <div id={this.props.id} className="blue-likes">
                         <img src={this.props.liked ? LikeLeftBlue : LikeLeft} id={`first-like-${this.props.id}`} className="first-like" onClick={() => { this.removeLike(this.props.id, this.props.likes) }} style={{ marginLeft: '0', visibility: this.props.likes >= 1 ? 'visible' : 'hidden' }} alt="Like" />

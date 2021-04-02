@@ -2,6 +2,7 @@ import React from 'react'
 import './Body.css'
 import Message from './Message'
 import ScrollToBottom from 'react-scroll-to-bottom';
+import LoadingProfilePicture from '../assets/loading_profile_picture.png'
 
 var initial_load = 0;
 var last_scroll = 0;
@@ -63,7 +64,9 @@ class Body extends React.Component {
                         )
                     }
                 </div>
-                <div className="scroll-check" />
+                <div className="scroll-check">
+                    
+                </div>
             </ScrollToBottom>
         )
     }

@@ -67,15 +67,9 @@ class GrayMessage extends React.Component {
                 <div className="gray-message" onDoubleClick={() => { this.addLike(this.props.id) }}>
                     {this.props.name !== 'repeat' && <p style={{ margin: '-5px 0 -5px 27.5px', fontSize: '0.7rem', color: 'white' }}>{this.props.name}</p>}
                     <div className="gray-message-body" style={{ position: 'relative' }}>
-                        {/* <p style={{ margin: '-5px 0 -5px 27.5px', fontSize: '0.7rem', color: 'white' }}>{this.props.name}</p> */}
                         <div id={`bubble-${this.props.id}`} className="gray-bubble">
                             <p id={`text-${this.props.id}`} className="gray-tweet-text">{this.props.text}</p>
                         </div>
-                        {/* <div id={this.props.id} className="gray-likes">
-                            <img src={this.props.liked? LikeRightBlue : LikeRight} id={`first-like-${this.props.id}`} className="first-like" style={{ marginRight: '0', visibility: this.props.likes >= 1 ? 'visible' : 'hidden' }} alt="Like" />
-                            <img src={this.props.liked? LikeRightBlue : LikeRight} id={`second-like-${this.props.id}`} className="second-like" style={{ marginRight: '-47px', visibility: this.props.likes >= 2 ? 'visible' : 'hidden' }} alt="Like" />
-                            <img src={this.props.liked? LikeRightBlue : LikeRight} id={`third-like-${this.props.id}`} className="third-like" style={{ marginRight: '-47px', visibility: this.props.likes >= 3 ? 'visible' : 'hidden' }} alt="Like" />
-                        </div> */}
                     </div>
                     <div id={this.props.id} className="gray-likes">
                         <img src={this.props.liked ? LikeRightBlue : LikeRight} id={`first-like-${this.props.id}`} className="first-like" onClick={() => { this.removeLike(this.props.id, this.props.likes) }} style={{ marginRight: '0', visibility: this.props.likes >= 1 ? 'visible' : 'hidden' }} alt="Like" />
