@@ -1,12 +1,11 @@
 require('dotenv').config({ path: '../.env' });
 const { TwitterClient } = require('twitter-api-client');
 const express = require('express');
+const bodyParser = require('body-parser');
 const shuffle = require('shuffle-array');
 const FRIEND_CURSOR_COUNT = 200;
 const HOME_TIMELINE_COUNT = 75;
 const ELAPSED_TIME = 15 * 60 * 1000;
-const app = express();
-const PORT = process.env.PORT || 3001;
 
 // Twitter client with environment variables (.env)
 const twitterClient = new TwitterClient({
@@ -153,7 +152,7 @@ async function get_home_timeline() {
       // var cur_tweet = new Tweet(data[i].created_at, data[i].id, get_full_text(data[i]), data[i].user.screen_name,
       //   data[i].user.profile_image_url_https, get_likes(data[i]), get_liked(data[i]));
       if (data[i].full_text.substring(0, 2) != "RT") {
-        var cur_tweet = new Tweet(Date.parse(data[i].created_at), data[i].id, data[i].full_text, data[i].user.screen_name,
+        var cur_tweet = new Tweet(Date.parse(data[i].created_at), data[i].id_str, data[i].full_text, data[i].user.screen_name,
           data[i].user.profile_image_url_https, data[i].favorite_count, data[i].favorited);
         if (!update_Tweet(cur_tweet)) {
           home_timeline.push(cur_tweet);
@@ -167,6 +166,32 @@ async function get_home_timeline() {
   }
 }
 
+async function like_tweet(id) {
+  console.log('Liking tweet ' + id);
+  try {
+    var params = { id: id };
+    await twitterClient.tweets.favoritesCreate(params);
+  } catch (e) {
+    console.log("Error: ", e);
+  }
+}
+
+async function unlike_tweet(id) {
+  console.log('Unliking tweet ' + id);
+  try {
+    var params = { id: id };
+    await twitterClient.tweets.favoritesDestroy(params);
+  } catch (e) {
+    console.log("Error: ", e);
+  }
+}
+
+const app = express();
+const PORT = process.env.PORT || 3001;
+
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+
 app.listen(PORT, () => {
   console.log(`Server listening on ${PORT}`);
 });
@@ -179,4 +204,12 @@ app.get("/friends", (req, res) => {
 app.get("/home_timeline", (req, res) => {
   get_home_timeline();
   res.json({ message: home_timeline });
+})
+
+app.post("/react_to_tweet", (req, res) => {
+  if (req.body.reaction === 'like') {
+    res.json({ message: like_tweet(req.body.id) })
+  } else if (req.body.reaction === 'unlike') {
+    res.json({ message: unlike_tweet(req.body.id) })
+  }
 })

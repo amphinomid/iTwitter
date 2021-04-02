@@ -7,42 +7,72 @@ import Autolinker from 'autolinker'
 import he from 'he'
 
 class BlueMessage extends React.Component {
-    addLike(id) {
-        var first_like = document.getElementById(`first-like-${id}`);
-        var second_like = document.getElementById(`second-like-${id}`);
-        var third_like = document.getElementById(`third-like-${id}`);
+    updateAddIcon(id) {
+        if (id !== -1) {
+            var first_like = document.getElementById(`first-like-${id}`);
+            var second_like = document.getElementById(`second-like-${id}`);
+            var third_like = document.getElementById(`third-like-${id}`);
 
-        if (third_like && third_like.style.visibility === 'visible') {
-            third_like.src = LikeLeftBlue;
-        } else if (second_like && second_like.style.visibility === 'visible') {
-            third_like.src = LikeLeftBlue;
-            third_like.style.visibility = 'visible';
-        } else if (first_like && first_like.style.visibility === 'visible') {
-            second_like.src = LikeLeftBlue;
-            second_like.style.visibility = 'visible';
-        } else {
-            first_like.src = LikeLeftBlue;
-            first_like.style.visibility = 'visible';
+            if (third_like && third_like.style.visibility === 'visible') {
+                third_like.src = LikeLeftBlue;
+            } else if (second_like && second_like.style.visibility === 'visible') {
+                third_like.src = LikeLeftBlue;
+                third_like.style.visibility = 'visible';
+            } else if (first_like && first_like.style.visibility === 'visible') {
+                second_like.src = LikeLeftBlue;
+                second_like.style.visibility = 'visible';
+            } else {
+                first_like.src = LikeLeftBlue;
+                first_like.style.visibility = 'visible';
+            }
+            document.getSelection().removeAllRanges();
         }
-        document.getSelection().removeAllRanges();
+    }
+
+    addLike(id) {
+        fetch("/react_to_tweet", {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                id: id,
+                reaction: 'like'
+            })
+        })
+            .then((res) => console.log(res))
+            .then(() => this.updateAddIcon(id));
+    }
+
+    updateRemoveIcon(id, likes) {
+        if (id !== -1) {
+            var first_like = document.getElementById(`first-like-${id}`);
+            var second_like = document.getElementById(`second-like-${id}`);
+            var third_like = document.getElementById(`third-like-${id}`);
+            if (likes > 3 && third_like.src.includes(LikeLeftBlue) && third_like.style.visibility === 'visible') {
+                third_like.src = LikeLeft;
+            } else if (likes === 3 && third_like.src.includes(LikeLeftBlue) && third_like.style.visibility === 'visible') {
+                third_like.src = LikeLeft;
+                third_like.style.visibility = 'hidden';
+            } else if (likes === 2 && second_like.src.includes(LikeLeftBlue) && second_like.style.visibility === 'visible') {
+                second_like.src = LikeLeft;
+                second_like.style.visibility = 'hidden';
+            } else if (likes === 1 && first_like.src.includes(LikeLeftBlue) && first_like.style.visibility === 'visible') {
+                first_like.src = LikeLeft;
+                first_like.style.visibility = 'hidden';
+            }
+        }
     }
 
     removeLike(id, likes) {
-        var first_like = document.getElementById(`first-like-${id}`);
-        var second_like = document.getElementById(`second-like-${id}`);
-        var third_like = document.getElementById(`third-like-${id}`);
-        if (likes > 3 && third_like.src.includes(LikeLeftBlue) && third_like.style.visibility === 'visible') {
-            third_like.src = LikeLeft;
-        } else if (likes === 3 && third_like.src.includes(LikeLeftBlue) && third_like.style.visibility === 'visible') {
-            third_like.src = LikeLeft;
-            third_like.style.visibility = 'hidden';
-        } else if (likes === 2 && second_like.src.includes(LikeLeftBlue) && second_like.style.visibility === 'visible') {
-            second_like.src = LikeLeft;
-            second_like.style.visibility = 'hidden';
-        } else if (likes === 1 && first_like.src.includes(LikeLeftBlue) && first_like.style.visibility === 'visible') {
-            first_like.src = LikeLeft;
-            first_like.style.visibility = 'hidden';
-        }
+        fetch("/react_to_tweet", {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                id: id,
+                reaction: 'unlike'
+            })
+        })
+            .then((res) => console.log(res))
+            .then(() => this.updateRemoveIcon(id, likes));
     }
 
     componentDidMount() {
@@ -69,9 +99,9 @@ class BlueMessage extends React.Component {
                         </div>
                     </div>
                     <div id={this.props.id} className="blue-likes">
-                        <img src={this.props.liked ? LikeLeftBlue : LikeLeft} id={`first-like-${this.props.id}`} className="first-like" onClick={() => { this.removeLike(this.props.id, this.props.likes) }} style={{ marginLeft: '0', visibility: this.props.likes >= 1 ? 'visible' : 'hidden' }} alt="Like" />
-                        <img src={this.props.liked ? LikeLeftBlue : LikeLeft} id={`second-like-${this.props.id}`} className="second-like" onClick={() => { this.removeLike(this.props.id, this.props.likes) }} style={{ marginLeft: '-47px', visibility: this.props.likes >= 2 ? 'visible' : 'hidden' }} alt="Like" />
-                        <img src={this.props.liked ? LikeLeftBlue : LikeLeft} id={`third-like-${this.props.id}`} className="third-like" onClick={() => { this.removeLike(this.props.id, this.props.likes) }} style={{ marginLeft: '-47px', visibility: this.props.likes >= 3 ? 'visible' : 'hidden' }} alt="Like" />
+                        <img src={this.props.liked && this.props.likes === 1 ? LikeLeftBlue : LikeLeft} id={`first-like-${this.props.id}`} className="first-like" onClick={() => { this.removeLike(this.props.id, this.props.likes) }} style={{ marginLeft: '0', visibility: this.props.likes >= 1 ? 'visible' : 'hidden' }} alt="Like" />
+                        <img src={this.props.liked && this.props.likes === 2 ? LikeLeftBlue : LikeLeft} id={`second-like-${this.props.id}`} className="second-like" onClick={() => { this.removeLike(this.props.id, this.props.likes) }} style={{ marginLeft: '-47px', visibility: this.props.likes >= 2 ? 'visible' : 'hidden' }} alt="Like" />
+                        <img src={this.props.liked && this.props.likes >= 3 ? LikeLeftBlue : LikeLeft} id={`third-like-${this.props.id}`} className="third-like" onClick={() => { this.removeLike(this.props.id, this.props.likes) }} style={{ marginLeft: '-47px', visibility: this.props.likes >= 3 ? 'visible' : 'hidden' }} alt="Like" />
                     </div>
                     {this.props.profile_picture !== 'repeat' && <img className="blue-tail" src={TailRight} alt='Tail of blue message bubble' />}
                 </div>

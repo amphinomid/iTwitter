@@ -26,6 +26,8 @@ export default App
 
 /*
 TODO:
+- LIKES
+  - When refreshing, recent likes go away; when reloading, all likes become blue
 - STYLE & OVERALL
   - After the "look" of the app works, connect everything to Twitter api client (e.g. liking, Tweeting)
     - Validate removeLike works after connecting everything - currently doesn't, because depends on actual like numbers
@@ -40,5 +42,6 @@ TODO:
     - Another animation idea: tweeting / sending message: similar animation as when sending iMessage
     - Another animation idea: nonlinear - decrease speed over duration of single scroll
   - Style scrollbar like iMessage's (thin & gray bar)
-  - Autosizing textarea should actually push the entire stream of Tweets upwards, not cover them
+  - Autosizing textarea should actually push the entire stream of Tweets upwards, not cover them)
+  - Add error-handling for liking and unliking Tweets
 */

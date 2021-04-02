@@ -70,7 +70,7 @@ class Body extends React.Component {
                     }
                 </div>
                 <div className="scroll-check">
-                    <div className="loading" style={{ marginLeft: '1rem', display: 'none' }}>
+                    <div className="loading" style={{ marginTop: '1rem', marginLeft: '1rem', display: 'none' }}>
                         <TweetProfilePicture name='repeat' url={LoadingProfilePicture} repeat='no-repeat' diameter={40} />
                         <img src={Loading1} style={{ height: '3.7rem', marginLeft: '3.7px' }} alt='Loading icons' />
                     </div>
