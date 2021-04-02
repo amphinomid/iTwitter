@@ -5,7 +5,7 @@ import HeaderProfilePicture from './HeaderProfilePicture'
 function Header() {
     const [friends, setData] = React.useState(null);
     React.useEffect(() => {
-        fetch("/friends")
+        fetch("/friends", {method: 'GET'})
             .then((res) => res.json())
             .then((friends) => setData(friends.message));
     }, []);

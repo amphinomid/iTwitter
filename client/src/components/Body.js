@@ -17,7 +17,7 @@ class Body extends React.Component {
 
     update_timeline() {
         console.log('Updating timeline...');
-        fetch("/home_timeline")
+        fetch("/home_timeline", {method: 'GET'})
             .then((res) => res.json())
             .then((home_timeline) => this.setState({ timeline: home_timeline.message }));
     }

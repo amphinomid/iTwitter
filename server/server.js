@@ -65,10 +65,10 @@ async function get_friends() {
       params.cursor = data.next_cursor;
     }
     shuffle(friends);
-    app.get("/friends", (req, res) => {
-      res.json({ message: friends });
-    });
     print_friends();
+    // app.get("/friends", (req, res) => {
+    //   res.json({ message: friends });
+    // });
   } catch (e) {
     console.log("Error: ", e);
   }
@@ -164,10 +164,10 @@ async function get_home_timeline() {
       }
     }
     handle_streaks();
-    app.get("/home_timeline", (req, res) => {
-      res.json({ message: home_timeline });
-    });
     print_home_timeline();
+    // app.get("/home_timeline", (req, res) => {
+    //   res.json({ message: home_timeline });
+    // });
   } catch (e) {
     console.log("Error: ", e);
   }
@@ -177,7 +177,12 @@ app.listen(PORT, () => {
   console.log(`Server listening on ${PORT}`);
 });
 
-get_friends();
+app.get("/friends", (req, res) => {
+  get_friends();
+  res.json({ message: friends })
+})
 
-// Temporary
-get_home_timeline();
+app.get("/home_timeline", (req, res) => {
+  get_home_timeline();
+  res.json({ message: home_timeline });
+})
