@@ -2,9 +2,11 @@ import React from 'react'
 import './Body.css'
 import Message from './Message'
 import ScrollToBottom from 'react-scroll-to-bottom';
+import TweetProfilePicture from './TweetProfilePicture'
 import LoadingProfilePicture from '../assets/loading_profile_picture.png'
+import Loading1 from '../assets/loading.gif'
 
-var initial_load = 0;
+var update_count = 0;
 var last_scroll = 0;
 
 class Body extends React.Component {
@@ -17,17 +19,20 @@ class Body extends React.Component {
     }
 
     update_timeline() {
+        var loading = document.getElementsByClassName("loading")[0];
+        loading.style.display = 'block';
         console.log('Updating timeline...');
-        fetch("/home_timeline", {method: 'GET'})
+        fetch("/home_timeline", { method: 'GET' })
             .then((res) => res.json())
-            .then((home_timeline) => this.setState({ timeline: home_timeline.message }));
+            .then((home_timeline) => this.setState({ timeline: home_timeline.message }))
+            .then(() => setTimeout(() => loading.style.display = 'none', 1000));
     }
 
     check_scroll() {
         var scroll_check_rect = document.getElementsByClassName("scroll-check")[0].getBoundingClientRect();
-        var send_tweet_padding_rect = document.getElementsByClassName("send-tweet-padding")[0].getBoundingClientRect();
-        if (scroll_check_rect.bottom <= last_scroll && Math.abs(scroll_check_rect.bottom - send_tweet_padding_rect.top) < 5) {
-            if (initial_load++ > 1) {
+        var reload_y = document.getElementsByClassName("footer")[0].getBoundingClientRect().top - 15;
+        if (scroll_check_rect.bottom <= last_scroll && Math.abs(scroll_check_rect.bottom - reload_y) < 5) {
+            if (update_count++ > 1 && update_count % 2 === 0) {
                 this.update_timeline();
             }
         }
@@ -46,7 +51,7 @@ class Body extends React.Component {
     render() {
         return (
             <ScrollToBottom className="body-container" >
-                <div className="placeholder" />
+                <div className="placeholder" style={{ height: '15vh' }} />
                 <div className="timeline">
                     {!this.state.timeline
                         ? <p style={{ textAlign: 'center', margin: 'auto' }}></p>
@@ -65,7 +70,10 @@ class Body extends React.Component {
                     }
                 </div>
                 <div className="scroll-check">
-                    
+                    <div className="loading" style={{ marginLeft: '1rem', display: 'none' }}>
+                        <TweetProfilePicture name='repeat' url={LoadingProfilePicture} repeat='no-repeat' diameter={40} />
+                        <img src={Loading1} style={{ height: '3.7rem', marginLeft: '3.7px' }} alt='Loading icons' />
+                    </div>
                 </div>
             </ScrollToBottom>
         )
