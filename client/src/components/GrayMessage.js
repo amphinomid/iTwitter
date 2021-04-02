@@ -4,7 +4,7 @@ import TweetProfilePicture from './TweetProfilePicture'
 import TailLeft from '../assets/tail_left.png'
 import LikeRight from '../assets/like_right_border.png'
 import LikeRightBlue from '../assets/like_right_blue_border.png'
-import textTolink from 'text-to-link'
+import Autolinker from 'autolinker'
 import he from 'he'
 
 class GrayMessage extends React.Component {
@@ -49,7 +49,7 @@ class GrayMessage extends React.Component {
     componentDidMount() {
         var tweet_texts = document.getElementsByClassName("gray-tweet-text");
         for (let i = 0; i < tweet_texts.length; i++) {
-            tweet_texts[i].innerHTML = he.decode(textTolink(tweet_texts[i].innerHTML, { target: "_blank", rel: "_noreferrer" }))
+            tweet_texts[i].innerHTML = he.decode(Autolinker.link(tweet_texts[i].innerHTML, { mention: 'twitter' }))
         }
         var likes = document.getElementsByClassName("gray-likes");
         for (let i = 0; i < likes.length; i++) {
