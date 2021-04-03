@@ -24,6 +24,7 @@ Turn your Twitter timeline into an iMessage groupchat for max absurdity. Enjoy!
 - Add functionality for deleting Tweets
 
 ### Acknowledgements
+The following resources were really helpful in the development of this project!
 - Tutorials:
     - [Setup](https://www.freecodecamp.org/news/how-to-create-a-react-app-with-a-node-backend-the-complete-guide/)
 - Libraries / packages:
