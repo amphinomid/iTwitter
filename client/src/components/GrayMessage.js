@@ -92,7 +92,7 @@ class GrayMessage extends React.Component {
 
     render() {
         return (
-            <div className="gray-tweet">
+            <div className="gray-tweet" style={{ marginTop: this.props.name === 'repeat' ? '-0.2rem' : '1rem' }}>
                 <TweetProfilePicture name={this.props.name} url={this.props.profile_picture} repeat={this.props.profile_picture} diameter={40} />
                 <div className="gray-message" onDoubleClick={() => { this.addLike(this.props.id) }}>
                     {this.props.name !== 'repeat' && <p style={{ margin: '-5px 0 -5px 27.5px', fontSize: '0.7rem', color: 'white' }}>{this.props.name}</p>}
