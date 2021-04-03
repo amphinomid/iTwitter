@@ -1,6 +1,8 @@
 # iTwitter
 Turn your Twitter timeline into an iMessage groupchat for max absurdity. Enjoy!
 
+Built with: Express, React, NodeJS
+
 ### Usage Notes & Caveats
 - Clone the project, create a .env file in root (same level as this file), and set NODE_ENV, PORT, TWITTER_API_KEY, TWITTER_API_KEY_SECRET, TWITTER_ACCESS_TOKEN, and TWITTER_ACCESS_TOKEN_SECRET (you'll need a Twitter developer account)
 - Timeline doesn't update automatically; infinite scroll is activated by scrolling downwards at the bottom of the feed
