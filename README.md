@@ -13,6 +13,7 @@ Turn your Twitter timeline into an iMessage groupchat for max absurdity. Enjoy!
 - Perhaps add retweet functionality later (retweet twice = no effect); see icons in "options-unused"
 - Maybe add unfollowing functionality — "remove from groupchat" — but this might be weird because removing from groupchat is
   two-way, unfollowing isn't
+  - Counterpoint: the app displays Tweets from followings, which are not necessarily two-way anyway
 - Swipe left to see timestamps on messages (in general, better animations — perhaps using react-use-gesture and react-spring)
   - Another animation idea: tweeting / sending message: similar animation as when sending iMessage
   - Another animation idea: nonlinear - decrease speed over duration of single scroll
