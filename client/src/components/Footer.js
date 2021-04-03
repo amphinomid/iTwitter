@@ -4,7 +4,7 @@ import autosize from 'autosize'
 import SendTweetButton from '../assets/send.png'
 import CannotSendTweetButton from '../assets/cannot_send.png'
 
-function update_send_tweet() {
+function update_padding() {
     var send_tweet = document.getElementsByClassName("send-tweet")[0];
     var send_tweet_rect = send_tweet.getBoundingClientRect();
     document.getElementsByClassName("send-tweet-padding")[0].style.bottom = `${document.body.clientHeight - send_tweet_rect.y}px`;
@@ -17,13 +17,9 @@ function update_send_tweet() {
     }
 }
 
-function send_tweet() {
-    if (document.getElementsByClassName("send-tweet-button")[0].src === CannotSendTweetButton) return;
-}
-
 function Footer() {
     React.useEffect(() => {
-        update_send_tweet();
+        update_padding();
         autosize(document.getElementsByClassName("send-tweet")[0]);
     }, []);
 
@@ -31,8 +27,8 @@ function Footer() {
         <div>
             <div className="send-tweet-padding" style={{ bottom: '0' }} />
             <div className="send-tweet-container">
-                <textarea className="send-tweet" onChange={update_send_tweet} placeholder="iMessage" rows={1}></textarea>
-                <input className="send-tweet-button" onClick={send_tweet} type="image" src={SendTweetButton} alt="Send tweet" />
+                <textarea className="send-tweet" onChange={update_padding} placeholder="iMessage" rows={1}></textarea>
+                <input className="send-tweet-button" type="image" src={SendTweetButton} alt="Send tweet" />
             </div>
         </div>
     )

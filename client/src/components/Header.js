@@ -14,7 +14,7 @@ function Header() {
         <div className="header-container">
             <div className="profile-pictures-container">
                 {!friends // Forgot flex-direction: 'row-reverse' was a thing 🤪 optionally fix later
-                    ? <p style={{ textAlign: 'center', margin: 'auto' }}>⌛</p>
+                    ? <p style={{ textAlign: 'center', margin: 'auto' }}><i>loading</i></p>
                     : friends.map((friend, index) =>
                         <HeaderProfilePicture
                             key={index}

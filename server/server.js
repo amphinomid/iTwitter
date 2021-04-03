@@ -131,12 +131,12 @@ function handle_streaks() {
     }
   }
   for (let i = 1; i < home_timeline.length; i++) {
-    if (home_timeline[i].name === home_timeline[i - 1].name && home_timeline[i - 1].time === 'repeat') {
+    if (home_timeline[i].name == home_timeline[i - 1].name && home_timeline[i - 1].time == 'repeat') {
       home_timeline[i - 1].profile_picture = 'repeat';
     }
   }
   for (let i = home_timeline.length - 2; i >= 0; i--) {
-    if (home_timeline[i].name === home_timeline[i + 1].name && home_timeline[i + 1].time === 'repeat') {
+    if (home_timeline[i].name == home_timeline[i + 1].name && home_timeline[i + 1].time == 'repeat') {
       home_timeline[i + 1].name = 'repeat';
     }
   }
@@ -186,6 +186,19 @@ async function unlike_tweet(id) {
   }
 }
 
+async function send_tweet(text) {
+  console.log('Tweeting: ' + text);
+  try {
+    var params = { status: text };
+    const data = await twitterClient.tweets.statusesUpdate(params);
+    var cur_tweet = new Tweet(Date.parse(data.created_at), data.id_str, data.text, data.user.screen_name,
+      data.user.profile_image_url_https, data.favorite_count, data.favorited);
+    home_timeline.push(cur_tweet);
+  } catch (e) {
+    console.log("Error: ", e);
+  }
+}
+
 const app = express();
 const PORT = process.env.PORT || 3001;
 
@@ -195,6 +208,9 @@ app.use(bodyParser.json());
 app.listen(PORT, () => {
   console.log(`Server listening on ${PORT}`);
 });
+
+get_friends()
+get_home_timeline()
 
 app.get("/friends", (req, res) => {
   get_friends();
@@ -207,9 +223,13 @@ app.get("/home_timeline", (req, res) => {
 })
 
 app.post("/react_to_tweet", (req, res) => {
-  if (req.body.reaction === 'like') {
+  if (req.body.reaction == 'like') {
     res.json({ message: like_tweet(req.body.id) })
-  } else if (req.body.reaction === 'unlike') {
+  } else if (req.body.reaction == 'unlike') {
     res.json({ message: unlike_tweet(req.body.id) })
   }
+})
+
+app.post("/send_tweet", (req, res) => {
+  res.json({ message: send_tweet(req.body.text) });
 })
