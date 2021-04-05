@@ -1,5 +1,5 @@
 # iTwitter
-Turn your Twitter timeline into an iMessage groupchat for max absurdity. Enjoy!
+Turn your Twitter timeline into an iMessage groupchat for max chaos. Enjoy!
 
 Built with: Express, React, NodeJS
 
