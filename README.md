@@ -11,6 +11,7 @@ Built with: Express, React, NodeJS
 - There's a small lag between when likes & unlikes are registered by the Twitter api, so scrolling / refreshing immediately after liking / unliking may cause the app to display the false status for a liked / unliked Tweet
 - No retweet functionality, no replies (might accidentally subtweet), no deleting Tweets
 - Basically SMS, text-only
+- A bit buggy sometimes, will work on it more when I have time! But feel free to try / break / fix stuff & make a PR, some suggestions are below
 
 ### TODO
 - Item nesting in GrayMessage.js and BlueMessage.js and corresponding CSS in Message.css are quite messy, can be cleaned up
