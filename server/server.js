@@ -6,14 +6,9 @@ const shuffle = require('shuffle-array');
 const FRIEND_CURSOR_COUNT = 200;
 const HOME_TIMELINE_COUNT = 75;
 const ELAPSED_TIME = 15 * 60 * 1000;
-
-// Twitter client with environment variables (.env)
-const twitterClient = new TwitterClient({
-  apiKey: process.env['TWITTER_API_KEY'],
-  apiSecret: process.env['TWITTER_API_KEY_SECRET'],
-  accessToken: process.env['TWITTER_ACCESS_TOKEN'],
-  accessTokenSecret: process.env['TWITTER_ACCESS_TOKEN_SECRET']
-});
+var passport = require('passport');
+var TwitterStrategy = require('passport-twitter').Strategy;
+var twitterClient;
 
 class Friend {
   constructor(name, profile_picture) {
@@ -199,18 +194,58 @@ async function send_tweet(text) {
   }
 }
 
+/* -------------------------------------------------------------------------------- */
+
 const app = express();
 const PORT = process.env.PORT || 3001;
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
+// Passport setup
+passport.use(new TwitterStrategy({
+  consumerKey: process.env['TWITTER_API_KEY'],
+  consumerSecret: process.env['TWITTER_API_KEY_SECRET'],
+  callbackURL: "https://itwitterapp.herokuapp.com/auth/twitter/callback"
+},
+  function (token, tokenSecret, profile, done) {
+    process.env['TWITTER_ACCESS_TOKEN'] = token;
+    process.env['TWITTER_ACCESS_TOKEN_SECRET'] = tokenSecret;
+    return done(null, profile);
+  }
+));
+
+app.use(passport.initialize());
+
 app.listen(PORT, () => {
   console.log(`Server listening on ${PORT}`);
 });
 
-get_friends()
-get_home_timeline()
+app.get("/auth/twitter", passport.authenticate("twitter"));
+
+app.get("/auth/twitter/callback",
+  passport.authenticate("twitter", {
+    successRedirect: "/timeline",
+    failureRedirect: "/"
+  })
+);
+
+app.get("/timeline", (req, res) => {
+  res.json({ message: "Authentication succeeded." })
+  // Twitter API client setup
+  twitterClient = new TwitterClient({
+    apiKey: process.env['TWITTER_API_KEY'],
+    apiSecret: process.env['TWITTER_API_KEY_SECRET'],
+    accessToken: process.env['TWITTER_ACCESS_TOKEN'],
+    accessTokenSecret: process.env['TWITTER_ACCESS_TOKEN_SECRET']
+  });
+  get_friends();
+  get_home_timeline();
+})
+
+app.get("/", (req, res) => {
+  res.json({ message: "Authentication failed. Please try again." })
+})
 
 app.get("/friends", (req, res) => {
   get_friends();
