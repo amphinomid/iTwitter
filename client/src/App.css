@@ -34,3 +34,7 @@
   min-width: 500px;
   height: 10vh;
 }
+
+a.sign-in-link:hover {
+  color: #4d79e7;
+}

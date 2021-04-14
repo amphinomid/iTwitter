@@ -1,19 +1,17 @@
 require('dotenv').config({ path: '../.env' });
 const { TwitterClient } = require('twitter-api-client');
 const express = require('express');
+const expressSession = require('express-session');
 const bodyParser = require('body-parser');
+const path = require('path');
 const shuffle = require('shuffle-array');
 const FRIEND_CURSOR_COUNT = 200;
 const HOME_TIMELINE_COUNT = 75;
 const ELAPSED_TIME = 15 * 60 * 1000;
-
-// Twitter client with environment variables (.env)
-const twitterClient = new TwitterClient({
-  apiKey: process.env['TWITTER_API_KEY'],
-  apiSecret: process.env['TWITTER_API_KEY_SECRET'],
-  accessToken: process.env['TWITTER_ACCESS_TOKEN'],
-  accessTokenSecret: process.env['TWITTER_ACCESS_TOKEN_SECRET']
-});
+var passport = require('passport');
+var TwitterStrategy = require('passport-twitter').Strategy;
+var twitterClient;
+var cur_user;
 
 class Friend {
   constructor(name, profile_picture) {
@@ -199,18 +197,76 @@ async function send_tweet(text) {
   }
 }
 
+/* -------------------------------------------------------------------------------- */
+
 const app = express();
 const PORT = process.env.PORT || 3001;
 
+app.use(expressSession({
+  secret: 'itwitter-secret',
+  resave: false,
+  saveUninitialized: true
+}));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+
+// Passport setup
+passport.serializeUser(function(user, done) {
+  cur_user = user;
+  done(null, user.id);
+});
+passport.deserializeUser(function(id, done) {
+  // User.findById(id, function(err, user) {
+  //   done(err, user);
+  // });
+  done(null, cur_user);
+});
+passport.use(new TwitterStrategy({
+  consumerKey: process.env['TWITTER_API_KEY'],
+  consumerSecret: process.env['TWITTER_API_KEY_SECRET'],
+  callbackURL: "https://itwitterapp.herokuapp.com/auth/twitter/callback"
+},
+  function (token, tokenSecret, profile, done) {
+    process.env['TWITTER_ACCESS_TOKEN'] = token;
+    process.env['TWITTER_ACCESS_TOKEN_SECRET'] = tokenSecret;
+    return done(null, profile);
+  }
+));
+
+app.use(passport.initialize());
+app.use(passport.session());
+app.use(express.static(path.resolve(__dirname, '../client/build')));
 
 app.listen(PORT, () => {
   console.log(`Server listening on ${PORT}`);
 });
 
-get_friends()
-get_home_timeline()
+app.get("/auth/twitter", passport.authenticate("twitter"));
+
+app.get("/auth/twitter/callback",
+  passport.authenticate("twitter", {
+    successRedirect: "/timeline",
+    failureRedirect: "/"
+  })
+);
+
+app.get("/timeline", (req, res) => {
+  // Twitter API client setup
+  twitterClient = new TwitterClient({
+    apiKey: process.env['TWITTER_API_KEY'],
+    apiSecret: process.env['TWITTER_API_KEY_SECRET'],
+    accessToken: process.env['TWITTER_ACCESS_TOKEN'],
+    accessTokenSecret: process.env['TWITTER_ACCESS_TOKEN_SECRET']
+  });
+  get_friends();
+  get_home_timeline();
+  res.sendFile(path.resolve(__dirname, '../client/build', 'index.html'));
+})
+
+app.get("/", (req, res) => {
+  res.json({ message: "Authentication failed. Please try again." })
+  res.sendFile(path.resolve(__dirname, '../client/build', 'index.html'));
+})
 
 app.get("/friends", (req, res) => {
   get_friends();
