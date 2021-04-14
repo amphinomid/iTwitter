@@ -218,8 +218,6 @@ app.use(bodyParser.json());
 //     done(err, user);
 //   });
 // });
-passport.serializeUser();
-passport.deserializeUser();
 passport.use(new TwitterStrategy({
   consumerKey: process.env['TWITTER_API_KEY'],
   consumerSecret: process.env['TWITTER_API_KEY_SECRET'],
