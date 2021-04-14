@@ -2,6 +2,7 @@ require('dotenv').config({ path: '../.env' });
 const { TwitterClient } = require('twitter-api-client');
 const express = require('express');
 const bodyParser = require('body-parser');
+const path = require('path');
 const shuffle = require('shuffle-array');
 const FRIEND_CURSOR_COUNT = 200;
 const HOME_TIMELINE_COUNT = 75;
@@ -216,6 +217,7 @@ passport.use(new TwitterStrategy({
 ));
 
 app.use(passport.initialize());
+app.use(express.static(path.resolve(__dirname, '../client/build')));
 
 app.listen(PORT, () => {
   console.log(`Server listening on ${PORT}`);
@@ -241,10 +243,12 @@ app.get("/timeline", (req, res) => {
   });
   get_friends();
   get_home_timeline();
+  res.sendFile(path.resolve(__dirname, '../client/build', 'index.html'));
 })
 
 app.get("/", (req, res) => {
   res.json({ message: "Authentication failed. Please try again." })
+  res.sendFile(path.resolve(__dirname, '../client/build', 'index.html'));
 })
 
 app.get("/friends", (req, res) => {
