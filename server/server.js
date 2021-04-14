@@ -251,7 +251,6 @@ app.get("/auth/twitter/callback",
 );
 
 app.get("/timeline", (req, res) => {
-  res.json({ message: "Authentication succeeded." })
   // Twitter API client setup
   twitterClient = new TwitterClient({
     apiKey: process.env['TWITTER_API_KEY'],
