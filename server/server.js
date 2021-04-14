@@ -210,14 +210,17 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 // Passport setup
-// passport.serializeUser(function(user, done) {
-//   done(null, user.id);
-// });
+passport.serializeUser(function(user, done) {
+  done(null, user.id);
+});
 // passport.deserializeUser(function(id, done) {
 //   User.findById(id, function(err, user) {
 //     done(err, user);
 //   });
 // });
+passport.deserializeUser(function(user, done) {
+  done(null, user.id);
+});
 passport.use(new TwitterStrategy({
   consumerKey: process.env['TWITTER_API_KEY'],
   consumerSecret: process.env['TWITTER_API_KEY_SECRET'],
