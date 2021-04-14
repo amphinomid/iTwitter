@@ -1,6 +1,7 @@
 require('dotenv').config({ path: '../.env' });
 const { TwitterClient } = require('twitter-api-client');
 const express = require('express');
+const expressSession = require('express-session');
 const bodyParser = require('body-parser');
 const path = require('path');
 const shuffle = require('shuffle-array');
@@ -200,6 +201,11 @@ async function send_tweet(text) {
 const app = express();
 const PORT = process.env.PORT || 3001;
 
+app.use(expressSession({
+  secret: 'itwitter-secret',
+  resave: false,
+  saveUninitialized: true
+}));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
