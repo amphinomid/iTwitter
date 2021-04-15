@@ -18,6 +18,7 @@ function App() {
           <Footer />
         </div>
       </div>
+      <a className="login-logout-link" href="/logout" style={{ position: 'absolute', top: '10px', right: '10px' }}>Log Out</a>
     </div>
   )
 }

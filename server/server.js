@@ -205,17 +205,17 @@ const PORT = process.env.PORT || 3001;
 app.use(expressSession({
   secret: 'itwitter-secret',
   resave: false,
-  saveUninitialized: true
+  saveUninitialized: false
 }));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 // Passport setup
-passport.serializeUser(function(user, done) {
+passport.serializeUser(function (user, done) {
   cur_user = user;
   done(null, user.id);
 });
-passport.deserializeUser(function(id, done) {
+passport.deserializeUser(function (id, done) {
   // User.findById(id, function(err, user) {
   //   done(err, user);
   // });
@@ -229,6 +229,13 @@ passport.use(new TwitterStrategy({
   function (token, tokenSecret, profile, done) {
     process.env['TWITTER_ACCESS_TOKEN'] = token;
     process.env['TWITTER_ACCESS_TOKEN_SECRET'] = tokenSecret;
+    // Twitter API client setup
+    twitterClient = new TwitterClient({
+      apiKey: process.env['TWITTER_API_KEY'],
+      apiSecret: process.env['TWITTER_API_KEY_SECRET'],
+      accessToken: process.env['TWITTER_ACCESS_TOKEN'],
+      accessTokenSecret: process.env['TWITTER_ACCESS_TOKEN_SECRET']
+    });
     return done(null, profile);
   }
 ));
@@ -250,23 +257,21 @@ app.get("/auth/twitter/callback",
   })
 );
 
+app.get("/", (req, res) => {
+  res.json({ message: "Authentication failed. Please try again." })
+  res.sendFile(path.resolve(__dirname, '../client/build', 'index.html'));
+})
+
 app.get("/timeline", (req, res) => {
-  // Twitter API client setup
-  twitterClient = new TwitterClient({
-    apiKey: process.env['TWITTER_API_KEY'],
-    apiSecret: process.env['TWITTER_API_KEY_SECRET'],
-    accessToken: process.env['TWITTER_ACCESS_TOKEN'],
-    accessTokenSecret: process.env['TWITTER_ACCESS_TOKEN_SECRET']
-  });
   get_friends();
   get_home_timeline();
   res.sendFile(path.resolve(__dirname, '../client/build', 'index.html'));
 })
 
-app.get("/", (req, res) => {
-  res.json({ message: "Authentication failed. Please try again." })
-  res.sendFile(path.resolve(__dirname, '../client/build', 'index.html'));
-})
+app.get("/logout", function (req, res) {
+  req.logout();
+  res.redirect("/");
+});
 
 app.get("/friends", (req, res) => {
   get_friends();
