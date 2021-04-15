@@ -205,8 +205,7 @@ const PORT = process.env.PORT || 3001;
 app.use(expressSession({
   secret: 'itwitter-secret',
   resave: false,
-  saveUninitialized: false,
-  cookie: { maxAge: 1000 }
+  saveUninitialized: false
 }));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
