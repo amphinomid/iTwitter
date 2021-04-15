@@ -205,7 +205,7 @@ const PORT = process.env.PORT || 3001;
 app.use(expressSession({
   secret: 'itwitter-secret',
   resave: false,
-  saveUninitialized: true
+  saveUninitialized: false
 }));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -269,8 +269,7 @@ app.get("/timeline", (req, res) => {
 })
 
 app.get("/logout", function (req, res) {
-  req.logOut();
-  req.session.destroy();
+  req.logout();
   res.redirect("/");
 });
 
