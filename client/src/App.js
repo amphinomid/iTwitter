@@ -18,6 +18,7 @@ function App() {
           <Footer />
         </div>
       </div>
+      <a className="login-logout-link" href="/logout">Log Out</a>
     </div>
   )
 }

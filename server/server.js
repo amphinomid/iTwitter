@@ -250,6 +250,11 @@ app.get("/auth/twitter/callback",
   })
 );
 
+app.get("/", (req, res) => {
+  res.json({ message: "Authentication failed. Please try again." })
+  res.sendFile(path.resolve(__dirname, '../client/build', 'index.html'));
+})
+
 app.get("/timeline", (req, res) => {
   // Twitter API client setup
   twitterClient = new TwitterClient({
@@ -263,10 +268,10 @@ app.get("/timeline", (req, res) => {
   res.sendFile(path.resolve(__dirname, '../client/build', 'index.html'));
 })
 
-app.get("/", (req, res) => {
-  res.json({ message: "Authentication failed. Please try again." })
-  res.sendFile(path.resolve(__dirname, '../client/build', 'index.html'));
-})
+app.get("/logout", function(req, res){
+  req.logout();
+  res.redirect("/");
+});
 
 app.get("/friends", (req, res) => {
   get_friends();
