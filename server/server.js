@@ -271,6 +271,7 @@ app.get("/timeline", (req, res) => {
 app.get("/logout", function (req, res) {
   req.logout();
   req.session.destroy();
+  res.clearCookie("connect.sid");
   res.redirect("/");
 });
 
