@@ -271,7 +271,7 @@ app.get("/timeline", (req, res) => {
 app.get("/logout", function (req, res) {
   req.logout();
   req.session.destroy();
-  res.clearCookie("connect.sid");
+  res.clearCookie("connect.sid", {path: "/", domain: "itwitterapp.herokuapp.com"});
   res.redirect("/");
 });
 
