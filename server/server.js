@@ -269,8 +269,10 @@ app.get("/timeline", (req, res) => {
 })
 
 app.get("/logout", function (req, res) {
-  req.logout();
-  res.redirect("/");
+  req.session.destroy(function (err) {
+    req.logout();
+    res.redirect('/');
+  });
 });
 
 app.get("/friends", (req, res) => {

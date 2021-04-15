@@ -32,6 +32,7 @@ Built with: Express, React, NodeJS
 The following resources were really helpful in the development of this project!
 - Tutorials:
     - [Setup](https://www.freecodecamp.org/news/how-to-create-a-react-app-with-a-node-backend-the-complete-guide/)
+    - [Twitter Login / Logout with Passport](https://medium.com/swlh/setting-up-twitter-oauth-with-node-and-passport-js-2298296b237c)
 - Libraries / packages:
     - [twitter-api-client](https://www.npmjs.com/package/twitter-api-client)
     - [shuffle-array](https://www.npmjs.com/package/shuffle-array)
