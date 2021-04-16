@@ -33,9 +33,12 @@
   width: 40vw;
   min-width: 500px;
   height: 10vh;
-  overflow-x: hidden;
 }
 
 a.login-logout-link:hover {
   color: #4d79e7;
+}
+
+* {
+  color: black;
 }

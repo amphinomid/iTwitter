@@ -12,10 +12,10 @@ Built with: Express, React, NodeJS
 - No retweet functionality, no replies (might accidentally subtweet), no deleting Tweets
 - Basically SMS, text-only
 - Logout doesn't work as expected, must close entire browser session
-- A bit buggy sometimes, will work on it more when I have time! But feel free to try / break / fix stuff & make a PR, some suggestions are below
+- Will work on it more when I have time! But feel free to try / break / fix stuff & make a PR, some suggestions are below
 
 ### TODO
-- Fix logout bug!
+- Fix logout bug
 - Item nesting in GrayMessage.js and BlueMessage.js and corresponding CSS in Message.css are quite messy, can be cleaned up
 - Perhaps add retweet functionality later (retweet twice = no effect); see icons in "options-unused"
 - Maybe add unfollowing functionality — "remove from groupchat" — but this might be weird because removing from groupchat is
