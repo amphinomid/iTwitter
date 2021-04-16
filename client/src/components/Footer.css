@@ -5,6 +5,7 @@
     justify-content: center;
     position: relative;
     color: black;
+    overflow-x: hidden;
 }
 
 .send-tweet-padding {
