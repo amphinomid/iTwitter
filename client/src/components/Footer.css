@@ -4,6 +4,7 @@
     flex-direction: row-reverse;
     justify-content: center;
     position: relative;
+    color: black;
 }
 
 .send-tweet-padding {
@@ -38,8 +39,4 @@
     right: 0;
     bottom: 0;
     margin-bottom: -7.5px;
-}
-
-* {
-    color: black;
 }
