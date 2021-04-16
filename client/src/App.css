@@ -5,6 +5,7 @@
   flex-direction: column;
   justify-content: center;
   background-color: black;
+  overflow-x: hidden;
 }
 
 .imessage {
@@ -37,10 +38,4 @@
 
 a.login-logout-link:hover {
   color: #4d79e7;
-}
-
-* {
-  background: blue !important;
-  color: #0f0 !important;
-  outline: solid #f00 1px !important;
 }
