@@ -27,6 +27,7 @@
 # dependencies
 /server/node_modules
 
-# AUTH
+# AUTH, MISC
 .env
 node_modules
+.well-known
