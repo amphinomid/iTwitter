@@ -5,7 +5,6 @@
   flex-direction: column;
   justify-content: center;
   background-color: black;
-  overflow-x: hidden;
 }
 
 .imessage {
@@ -34,6 +33,7 @@
   width: 40vw;
   min-width: 500px;
   height: 10vh;
+  overflow-x: hidden;
 }
 
 a.login-logout-link:hover {
