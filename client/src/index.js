@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import './index.css';
 import Auth from './Auth';
+import Privacy from './Privacy';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
