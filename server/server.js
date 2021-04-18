@@ -262,6 +262,10 @@ app.get("/", (req, res) => {
   res.sendFile(path.resolve(__dirname, '../client/build', 'index.html'));
 })
 
+app.get("/privacy", (req, res) => {
+  res.sendFile(path.resolve(__dirname, '../client/build', 'index.html'));
+})
+
 app.get("/timeline", (req, res) => {
   get_friends();
   get_home_timeline();
