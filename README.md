@@ -6,7 +6,6 @@ Built with: Express, React, NodeJS
 ![iMessage groupchat with texts as Tweets](screenshot.png)
 
 ### Usage Notes & Caveats
-- Clone the project, create a .env file in root (same level as this file), and set NODE_ENV, PORT, TWITTER_API_KEY, TWITTER_API_KEY_SECRET, TWITTER_ACCESS_TOKEN, and TWITTER_ACCESS_TOKEN_SECRET (you'll need a Twitter developer account)
 - Timeline doesn't update automatically; infinite scroll is activated by scrolling downwards at the bottom of the feed
 - There's a small lag between when likes & unlikes are registered by the Twitter api, so scrolling / refreshing immediately after liking / unliking may cause the app to display the false status for a liked / unliked Tweet
 - No retweet functionality, no replies (might accidentally subtweet), no deleting Tweets
