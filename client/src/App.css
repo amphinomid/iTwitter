@@ -19,6 +19,7 @@
   height: 90vh;
   position: relative;
   overflow: hidden;
+  background-color: red;
 }
 
 .header {
