@@ -11,6 +11,7 @@ ReactDOM.render(
     <BrowserRouter>
       <Switch>
         <Route exact path="/" render={ props => <Auth {...props} />} />
+        <Route exact path="/privacy" render={ props => <Privacy {...props} />} />
         <Route exact path="/timeline" render={ props => <App {...props} />} />
       </Switch>
     </BrowserRouter>
