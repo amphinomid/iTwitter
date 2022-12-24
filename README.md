@@ -1,4 +1,5 @@
 # iTwitter
+### Express, React, Node, Twitter API
 Turn your Twitter timeline into an iMessage groupchat for max chaos. Enjoy!
 
 Built with: Express, React, NodeJS
