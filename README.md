@@ -34,6 +34,7 @@ Built with: Express, React, NodeJS
 ### Acknowledgements
 The following resources were really helpful in the development of this project!
 - Tutorials:
+    - [Deploying to Render](https://dev.to/gregpetropoulos/render-deployment-free-tier-of-mern-app-52mk) — don't know if this'll work yet haha
     - [Setup](https://www.freecodecamp.org/news/how-to-create-a-react-app-with-a-node-backend-the-complete-guide/)
     - [Twitter Login / Logout with Passport](https://medium.com/swlh/setting-up-twitter-oauth-with-node-and-passport-js-2298296b237c)
 - Libraries / packages:
