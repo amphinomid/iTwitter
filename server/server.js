@@ -224,7 +224,7 @@ passport.deserializeUser(function (id, done) {
 passport.use(new TwitterStrategy({
   consumerKey: process.env['TWITTER_API_KEY'],
   consumerSecret: process.env['TWITTER_API_KEY_SECRET'],
-  callbackURL: "https://itwttr.herokuapp.com/auth/twitter/callback"
+  callbackURL: "https://itwitter.onrender.com/auth/twitter/callback"
 },
   function (token, tokenSecret, profile, done) {
     process.env['TWITTER_ACCESS_TOKEN'] = token;
