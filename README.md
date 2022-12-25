@@ -1,5 +1,6 @@
 # iTwitter
 ### Express, React, Node, Twitter API
+#### Currently not working because Heroku removed their free plan 😀 working on deploying it elsewhere!
 Turn your Twitter timeline into an iMessage groupchat for max chaos. Enjoy!
 
 Built with: Express, React, NodeJS
